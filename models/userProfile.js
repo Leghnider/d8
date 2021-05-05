@@ -28,5 +28,5 @@ var UserProfileSchema = new mongoose.Schema({
   }]
 })
 
-var userProfile = mongoose.model('UserProfile', UserProfileSchema);
-module.exports = userProfile; 
+var UserProfile = mongoose.model('UserProfile', UserProfileSchema);
+module.exports = UserProfile; 
