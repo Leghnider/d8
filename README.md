@@ -1,6 +1,6 @@
-# Acebook
+# d8 
 
-This is a Node.js template for the Acebook engineering project.
+A dating site for single people. 
 
 It uses:
 - [Express](https://expressjs.com/) web framework for Node.js.
@@ -13,7 +13,7 @@ It uses:
 
 ## Card wall
 
-REPLACE THIS TEXT WITH A LINK TO YOUR CARD WALL
+https://trello.com/b/TVboW4uQ/team-fire
 
 ## Quickstart
 
@@ -32,9 +32,6 @@ REPLACE THIS TEXT WITH A LINK TO YOUR CARD WALL
 
 ### Set up your project
 
-1. Fork this repository
-1. Rename your fork to `acebook-<team name>`
-1. Clone your fork to your local machine
 1. Install Node.js dependencies
     ```
     npm install
