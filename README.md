@@ -75,5 +75,5 @@ integration tests to pass.
 ```
 npm run start:test
 ```
-This starts the server on port `3030` and uses the `acebook_test` MongoDB database,
+This starts the server on port `3030` and uses the `d8_test` MongoDB database,
 so that integration tests do not interact with the development server.
