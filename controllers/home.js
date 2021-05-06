@@ -77,12 +77,11 @@ var HomeController = {
      })
    },
    Logout: function (req, res) {
-    req.session.user_id = null;
-    if (res.session.user_id === null) {
-      res.redirect("/login");
-    }
+    // req.session.user_id = null;
+    // if (res.session.user_id === null) {
+      res.redirect('/login');
+  //  }
   },
-
 };
 
 module.exports = HomeController;
