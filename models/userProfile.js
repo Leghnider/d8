@@ -4,10 +4,10 @@ var UserProfileSchema = new mongoose.Schema({
   userAccount:{
     type: mongoose.Schema.Types.ObjectId, ref: "userAccount",
   }, 
-  profilePicture: [{
-    url: String,
-    filename: String
-  }],
+  // profilePicture: [{
+  //   url: String,
+  //   filename: String
+  // }],
   bio:{
     type: String
   },
