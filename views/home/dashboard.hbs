@@ -1,7 +1,13 @@
 {{!-- This will have a list of all the profiles --}}
 <h1>Your Potential D8s</h1>
 <ul class="userProfiles">
-  {{#each userProfiles}}
-    <li>{{this.username}}</li>
+  {{#each userAccounts}}
+  <li>{{this.firstName}}</li>
   {{/each}}
 </ul>
+
+<p>
+<form id="log-out-form" action="/logout" method="post">
+  <button value="Log Out"> Log Out </button>
+</form>
+</p>
