@@ -1,7 +1,6 @@
 <h1>Register form</h1>
 
-<form id="sign-up-form" action="" method="post">
-
+<form id="register-form" action="/register" method="post">
   <label for="firstName">First Name: </label>
   <input id="firstName" type="text" name="firstName" value="" required>
 
@@ -9,10 +8,10 @@
   <input id="lastName" type="text" name="lastName" value="" required>
 
   <label for="age">Age: </label>
-  <input type="number" id="age" name="age" min="18" max="100">
+  <input type="number" id="age" name="age" min="18" max="100" required>
 
   <label for="email">Email :</label>
-  <input type="email" id="email" name="email">
+  <input type="email" id="email" name="email" required>
 
   <label for="password">Password: </label>
   <input id="password" type="password" name="password" value="" required>
