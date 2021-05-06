@@ -13,6 +13,7 @@ router.post('/logout', HomeController.Logout)
 router.post('/login', HomeController.Authenticate);
 router.get('/home', HomeController.Dashboard);
 
+
 /*
 
 router.get('/register-profile', HomeController.RegisterAccount); 
