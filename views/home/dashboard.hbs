@@ -1,6 +1,12 @@
 {{!-- This will have a list of all the profiles --}}
 <h1>Your Potential D8s</h1>
 
+<p>
+<form id="log-out-form" action="/logout" method="post">
+  <button value="Log Out"> Log Out </button>
+</form>
+</p>
+
 <a href="/profiles/{{userId._id}}">Your profile</a>
 
 {{#each userProfiles}}
@@ -13,3 +19,4 @@
     <p>Bio: {{this.bio}}</p>
   </div> 
 {{/each}}
+

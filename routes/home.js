@@ -14,10 +14,9 @@ router.post('/login', HomeController.Authenticate);
 router.get('/home', HomeController.Dashboard);
 
 /*
-router.get('/logout', HomeController.Logout);
+
 router.get('/register-profile', HomeController.RegisterAccount); 
 
 */
-
 
 module.exports = router;
