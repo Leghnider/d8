@@ -26,9 +26,18 @@ var HomeController = {
           throw err 
         }
       res.status(201).redirect('/');
-     });
-    }
-  };
+    });
+   },
+   Login: function (req, res) {
+    res.render("home/login", { title: "Log In" });
+   },
 
+   Logout: function (req, res) {
+    req.session.user_id = null;
+    if (res.session.user_id === null) {
+      res.redirect("/login");
+    }
+  },
+};
 
 module.exports = HomeController;
