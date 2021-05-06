@@ -55,7 +55,11 @@ var HomeController = {
     res.render("home/login", { title: "Log In" });
    },
    Dashboard: function(req, res){
-    res.render("home/dashboard", { title: "Home" });
+     UserProfile.find(function(err, userProfiles) {
+      if (err) { throw err; }
+      console.log(userProfiles)
+      res.render("home/dashboard", { title: "Home", userProfiles: userProfiles });
+     })
    },
    Logout: function (req, res) {
     req.session.user_id = null;

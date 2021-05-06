@@ -1,7 +1,13 @@
 {{!-- This will have a list of all the profiles --}}
 <h1>Your Potential D8s</h1>
+
 <ul class="userProfiles">
   {{#each userProfiles}}
-    <li>{{this.username}}</li>
+    <p>Username: {{this.username}}</p>
+    <p>Age: {{this.age}}</p>
+    <p>Gender: {{this.gender}}</p>
+    <p>Location: {{this.location}}</p>
+    <p>Interested in: {{this.interested_in}}</p>
+    <p>Bio: {{this.bio}}</p>
   {{/each}}
 </ul>
