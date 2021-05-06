@@ -74,15 +74,14 @@ var HomeController = {
    Dashboard: function(req, res){
      UserProfile.find(function(err, userProfiles) {
       if (err) { throw err; }
-      console.log(userProfiles)
       res.render("home/dashboard", { title: "Home", userProfiles: userProfiles });
      })
    },
    Logout: function (req, res) {
-    // req.session.user_id = null;
-    // if (res.session.user_id === null) {
+    req.session.user_id = null;
+    if (req.session.user_id === null) {
       res.redirect('/login');
-  //  }
+    }
   },
 };
 

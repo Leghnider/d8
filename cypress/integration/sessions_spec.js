@@ -1,4 +1,9 @@
 describe("session", function () {
+  before(async (done) => {
+    await cy.task("db:drop");
+    done();
+  });
+
   describe("loggging in to a session", function () {
     beforeEach(() => {});
 
