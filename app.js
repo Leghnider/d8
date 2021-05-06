@@ -6,7 +6,7 @@ var logger = require('morgan');
 
 var homeRouter = require('./routes/home');
 var userRouter = require('./routes/user');
-var profilesRouter = requirw('./routes/profiles');
+// var profilesRouter = require('./routes/profiles');
 
 var app = express();
 
@@ -26,7 +26,7 @@ app.use('/', homeRouter);
 // routes for the user's information 
 app.use('/user', userRouter); /* :id, :id/edit, :matches */
 //routes for the profiles to view 
-app.use('/profiles', profilesRouter)
+// app.use('/profiles', profilesRouter)
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
