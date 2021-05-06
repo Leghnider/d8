@@ -31,6 +31,21 @@ var HomeController = {
    Login: function (req, res) {
     res.render("home/login", { title: "Log In" });
    },
+   Authenticate: async function(req, res){
+    const { email, password } = req.body;
+    const user = await User.findOne({ email });
+    if(!user){
+      res.redirect('/login');
+    }
+    const validPassword = await bcrypt.compare(password, user.password);
+    if(validPassword){
+      req.session.user_id = user._id;
+      res.redirect('/home');
+    } 
+    else{
+      res.redirect('/login');
+    }
+  },
 
    Logout: function (req, res) {
     req.session.user_id = null;
@@ -38,6 +53,13 @@ var HomeController = {
       res.redirect("/login");
     }
   },
+  Dashboard: function(req, res) {
+    User.find(function(err, users) {
+      if (err) { throw err; }
+
+      res.render('home/dashboard', { users: users });
+    });
+  }
 };
 
 module.exports = HomeController;

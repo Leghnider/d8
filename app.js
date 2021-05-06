@@ -3,16 +3,27 @@ var express = require('express');
 var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
+const session = require('express-session');
+
 
 var homeRouter = require('./routes/home');
 var userRouter = require('./routes/user');
-// var profilesRouter = require('./routes/profiles');
+var profilesRouter = require('./routes/profiles');
 
 var app = express();
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'hbs');
+
+//sessions
+app.use(
+	session({
+		secret: "keyboard cat",
+		resave: false,
+		saveUninitialized: false,
+	}),
+  );
 
 app.use(logger('dev'));
 app.use(express.json());
@@ -26,7 +37,7 @@ app.use('/', homeRouter);
 // routes for the user's information 
 app.use('/user', userRouter); /* :id, :id/edit, :matches */
 //routes for the profiles to view 
-// app.use('/profiles', profilesRouter)
+app.use('/profiles', profilesRouter)
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

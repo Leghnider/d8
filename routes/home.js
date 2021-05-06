@@ -7,10 +7,12 @@ router.get('/', HomeController.Index);
 router.get('/register', HomeController.Register);
 router.post('/register', HomeController.CreateAccount);
 router.get('/login', HomeController.Login);
+router.post('/login', HomeController.Authenticate);
+router.get('/home', HomeController.Dashboard);
 /*
 router.get('/logout', HomeController.Logout);
 router.get('/register-profile', HomeController.RegisterAccount); 
-router.get('/home', HomeController.Dashboard);
+
 */
 
 
