@@ -9,6 +9,8 @@ router.post('/register', HomeController.CreateAccount);
 router.get('/register-profile', HomeController.RegisterProfile);
 router.post('/register-profile', HomeController.CreateProfile);
 router.get('/login', HomeController.Login);
+
+router.post('/login', HomeController.Authenticate);
 router.get('/home', HomeController.Dashboard);
 
 /*

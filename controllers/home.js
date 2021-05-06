@@ -54,6 +54,21 @@ var HomeController = {
    Login: function (req, res) {
     res.render("home/login", { title: "Log In" });
    },
+   Authenticate: async function(req, res){
+    const { email, password } = req.body;
+    const user = await User.findOne({ email });
+    if(!user){
+      res.redirect('/login');
+    }
+    const validPassword = await bcrypt.compare(password, user.password);
+    if(validPassword){
+      req.session.user_id = user._id;
+      res.redirect('/home');
+    } 
+    else{
+      res.redirect('/login');
+    }
+  },
    Dashboard: function(req, res){
      UserProfile.find(function(err, userProfiles) {
       if (err) { throw err; }
