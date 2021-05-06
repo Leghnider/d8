@@ -1,4 +1,8 @@
 describe('Register', function(){
+  before(async (done) => {
+    await cy.task("db:drop");
+    done();
+  });
   
   it('has a register form', function() {
     cy.visit('/register');
