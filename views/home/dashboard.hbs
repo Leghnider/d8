@@ -1,10 +1,15 @@
 {{!-- This will have a list of all the profiles --}}
 <h1>Your Potential D8s</h1>
+
 <a href="/profiles/{{userId._id}}">Your profile</a>
 
-<ul class="userProfiles">
-  {{#each userProfiles}}
-    <li>{{this.username}}</li>
-  {{/each}}
-  
-</ul>
+{{#each userProfiles}}
+  <div style="border: 1px solid black">
+    <p>Username: {{this.username}}</p>
+    <p>Age: {{this.age}}</p>
+    <p>Gender: {{this.gender}}</p>
+    <p>Location: {{this.location}}</p>
+    <p>Interested in: {{this.interested_in}}</p>
+    <p>Bio: {{this.bio}}</p>
+  </div> 
+{{/each}}

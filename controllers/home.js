@@ -1,11 +1,11 @@
-var User = require('../models/userAccount')
+var User = require('../models/userAccount');
+var UserProfile = require('../models/userProfile');
 const bcrypt = require('bcrypt');
 
 var HomeController = {
   Index: function(req, res) {
     res.render('home/index', { title: 'd8' });
   },
-
   Register: function (req, res) {
 		res.render("home/register", {title: 'Register'});
 	},
@@ -25,7 +25,30 @@ var HomeController = {
         if (err) { 
           throw err 
         }
-      res.status(201).redirect('/');
+      // redirect this to the next registration page
+      res.status(201).redirect('/register-profile');
+    });
+   },
+   RegisterProfile: function (req, res) {
+    res.render("home/register-profile", {title: 'Register Profile'});
+   },
+   CreateProfile: async function (req, res) {
+    console.log(req.body)
+    const { username, bio, location, gender, age, interested_in } = req.body;
+
+    //need to add the persisting information of the user and picture
+    var userProfile = new UserProfile({
+      username,
+      bio,
+      location, 
+      gender, 
+      age, 
+      interested_in,
+    });
+
+    await userProfile.save(function(err){
+      if (err) { throw err }; 
+      res.status(201).redirect('/home');
     });
    },
    Login: function (req, res) {
@@ -46,20 +69,19 @@ var HomeController = {
       res.redirect('/login');
     }
   },
-
+   Dashboard: function(req, res){
+     UserProfile.find(function(err, userProfiles) {
+      if (err) { throw err; }
+      console.log(userProfiles)
+      res.render("home/dashboard", { title: "Home", userProfiles: userProfiles });
+     })
+   },
    Logout: function (req, res) {
     req.session.user_id = null;
     if (res.session.user_id === null) {
       res.redirect("/login");
     }
   },
-  Dashboard: function(req, res) {
-    User.find(function(err, users) {
-      if (err) { throw err; }
-
-      res.render('home/dashboard', { users: users });
-    });
-  }
 };
 
 module.exports = HomeController;
