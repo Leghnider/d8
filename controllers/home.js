@@ -65,25 +65,24 @@ var HomeController = {
     const validPassword = await bcrypt.compare(password, user.password);
     if (validPassword) {
       req.session.user_id = user._id;
-      res.redirect("/home");
-    } else {
-      res.redirect("/login");
+      res.redirect('/home');
+    } 
+    else{
+      res.redirect('/login');
     }
   },
-  Dashboard: function (req, res) {
-    UserProfile.find(function (err, userProfiles) {
-      if (err) {
-        throw err;
-      }
-      console.log(userProfiles);
-      res.render("home/dashboard", {
-        title: "Home",
-        userProfiles: userProfiles,
-      });
-    });
-  },
-  Logout: function (req, res) {
-    res.redirect("/login");
+   Dashboard: function(req, res){
+     UserProfile.find(function(err, userProfiles) {
+      if (err) { throw err; }
+      console.log(userProfiles)
+      res.render("home/dashboard", { title: "Home", userProfiles: userProfiles });
+     })
+   },
+   Logout: function (req, res) {
+    // req.session.user_id = null;
+    // if (res.session.user_id === null) {
+      res.redirect('/login');
+  //  }
   },
 };
 
