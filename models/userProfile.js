@@ -1,7 +1,5 @@
 var mongoose = require('mongoose');
-const images = require('./profileImage');
 const Schema = mongoose.Schema;
-
 
 var UserProfileSchema = new mongoose.Schema({
   useraccount: [
@@ -33,9 +31,6 @@ var UserProfileSchema = new mongoose.Schema({
     type: String,
   }]
 })
-
-
-
 
 
 var UserProfile = mongoose.model('UserProfile', UserProfileSchema);
