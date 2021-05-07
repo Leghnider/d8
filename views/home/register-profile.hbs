@@ -4,7 +4,9 @@
 
 {{!-- Forms here to collect information from the user --}}
 
-<form id="register-profile-form" action="/register-profile" method="post">
+<form id="register-profile-form" action="/register-profile" method="post" enctype="multipart/form-data">
+  <input type='file' name="profileImage" id="profileImage">
+
   <label for="username">Username: </label>
   <input id="username" type="text" name="username" value="" required>
 

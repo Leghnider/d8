@@ -1,16 +1,19 @@
 var mongoose = require('mongoose');
-// var Schema = mongoose.Schema
+const images = require('./profileImage');
+const Schema = mongoose.Schema;
+
 
 var UserProfileSchema = new mongoose.Schema({
-  useraccount: [ {
-    type: mongoose.Schema.Types.ObjectId, 
-    ref: "UserAccount"
-  },
-], 
-  // profilePicture: [{
-  //   url: String,
-  //   filename: String
-  // }],
+  useraccount: [
+    {
+      type: mongoose.Schema.Types.ObjectId, 
+      ref: "UserAccount"
+    },
+  ], 
+  profileImages: [{
+    url: String,
+    filename: String
+  }],
   bio:{
     type: String
   },
@@ -30,6 +33,10 @@ var UserProfileSchema = new mongoose.Schema({
     type: String,
   }]
 })
+
+
+
+
 
 var UserProfile = mongoose.model('UserProfile', UserProfileSchema);
 module.exports = UserProfile; 
