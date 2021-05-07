@@ -24,16 +24,19 @@ var HomeController = {
     await user.save(function (err) {
       if (err) {
         throw err;
-      }
+      } else {
       // redirect this to the next registration page
+      req.session.user_id = user._id
+      console.log(req.session.user_id)
       res.status(201).redirect("/register-profile");
-    });
+   } });
   },
   RegisterProfile: function (req, res) {
     res.render("home/register-profile", { title: "Register Profile" });
   },
   CreateProfile: async function (req, res) {
-    console.log(req.body);
+    const user = await User.findById(req.session.user_id);
+    console.log(req.session.user_id)
     const { username, bio, location, gender, age, interested_in } = req.body;
 
     //need to add the persisting information of the user and picture
@@ -44,6 +47,8 @@ var HomeController = {
       gender,
       age,
       interested_in,
+      author: user._id
+
     });
 
     await userProfile.save(function (err) {
@@ -71,12 +76,34 @@ var HomeController = {
       res.redirect('/login');
     }
   },
-   Dashboard: function(req, res){
-     UserProfile.find(function(err, userProfiles) {
-      if (err) { throw err; }
-      res.render("home/dashboard", { title: "Home", userProfiles: userProfiles });
-     })
-   },
+
+  Dashboard: async function (req, res) {
+    const user = await User.findById(req.session.user_id);
+    let userProfiles = null;
+  
+    userProfiles = await UserProfile.find({})
+      .populate("UserAccount")
+
+    await res.render("home/dashboard", { title: "Home", userProfiles: userProfiles, user: user });
+    
+
+    },
+
+  //  Dashboard:  async function(req, res) {
+  //    console.log(req.session.user_id)
+  //    const user = await User.findById(req.session.user_id)
+  //   //  const userProfiles = UserProfile.find({})
+  //   //   .populate('UserAccount')
+  //   UserProfile.find(async function(err, userProfiles) {
+  //     if (err) { throw err; }
+  
+  //     await res.render("home/dashboard", { title: "Home", userProfiles: userProfiles, user: user });
+  //     //console.log(userProfiles)
+  //   // })
+  //   })
+  //   },
+  
+  
    Logout: function (req, res) {
     req.session.user_id = null;
     if (req.session.user_id === null) {
