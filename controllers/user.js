@@ -22,6 +22,7 @@ var UserController = {
 			res.redirect("/login");
 		}
 		const user = await User.findById(req.session.user_id);
+     
 		res.render("user/edit", { title: "Edit Profile", user: user });
 	},
 
@@ -29,9 +30,11 @@ var UserController = {
 		if (!req.session.user_id) {
 			res.redirect("/login");
 		}
-    console.log(req.body)
+    const userInfo = await UserProfile.findOne({ 
+      useraccount: { _id:  req.session.user_id }
+    })
 		const userProfile = await UserProfile.findByIdAndUpdate(
-			{ useraccount: { _id:  req.session.user_id }},
+			userInfo._id,
 			{
 				// profilePicture: req.body.profilePic,
 				bio: req.body.bio,
@@ -40,7 +43,7 @@ var UserController = {
 				age: req.body.age
 			}
 		);
-		res.status(201).redirect(`/user/${userProfile._id}`);
+		res.status(201).redirect(`/user/${req.session.user_id}`);
 	},
 };
 		
