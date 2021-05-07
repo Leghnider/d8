@@ -1,9 +1,12 @@
 var mongoose = require('mongoose');
+// var Schema = mongoose.Schema
 
 var UserProfileSchema = new mongoose.Schema({
-  userAccount:{
-    type: mongoose.Schema.Types.ObjectId, ref: "userAccount",
-  }, 
+  author: [ {
+    type: mongoose.Schema.Types.ObjectId, 
+    ref: "UserAccount"
+  },
+], 
   // profilePicture: [{
   //   url: String,
   //   filename: String

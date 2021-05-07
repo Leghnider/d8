@@ -6,9 +6,5 @@ var router = express.Router();
 var ProfilesController = require('../controllers/profiles');
 
 router.get('/:id', ProfilesController.ShowProfile);
-// router.get('/:id', ProfilesController.UserProfile);
-// router.get('/edit', ProfilesController.EditProfile);
-
-
 
 module.exports = router;

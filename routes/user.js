@@ -5,10 +5,10 @@ var router = express.Router();
 
 var UserController = require('../controllers/user');
 
-/*
-router.get('/user/:id', UserController.UserProfile);
-router.get('/user/:id/edit', UserController.EditProfile);
-*/
+
+router.get('/:id', UserController.UserProfile);
+router.get('/:id/edit', UserController.EditProfile);
+// router.post('/:id/edit', UserController.UpdateBioDB);
 
 // router.get('/user/matches', UserController.EditProfile);
 

@@ -20,8 +20,6 @@ app.set('view engine', 'hbs');
 app.use(
 	session({
 		secret: "keyboard cat",
-		resave: false,
-		saveUninitialized: false,
 	}),
   );
 
