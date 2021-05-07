@@ -2,7 +2,7 @@ var mongoose = require('mongoose');
 // var Schema = mongoose.Schema
 
 var UserProfileSchema = new mongoose.Schema({
-  author: [ {
+  useraccount: [ {
     type: mongoose.Schema.Types.ObjectId, 
     ref: "UserAccount"
   },
