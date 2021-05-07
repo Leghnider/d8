@@ -9,7 +9,6 @@ var UserController = {
     }
     const user = await User.findById(req.session.user_id);
     const userProfile = await UserProfile.find({ author: { _id:  req.session.user_id }})
-    console.log(userProfile)
     res.render("user/index", { title: "Profiles", user: user, userProfile: userProfile });
   },
   EditProfile: async (req, res) => {

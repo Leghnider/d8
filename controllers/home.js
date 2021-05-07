@@ -36,7 +36,6 @@ var HomeController = {
   },
   CreateProfile: async function (req, res) {
     const user = await User.findById(req.session.user_id);
-    console.log(req.session.user_id)
     const { username, bio, location, gender, age, interested_in } = req.body;
 
     //need to add the persisting information of the user and picture
@@ -88,22 +87,6 @@ var HomeController = {
     
 
     },
-
-  //  Dashboard:  async function(req, res) {
-  //    console.log(req.session.user_id)
-  //    const user = await User.findById(req.session.user_id)
-  //   //  const userProfiles = UserProfile.find({})
-  //   //   .populate('UserAccount')
-  //   UserProfile.find(async function(err, userProfiles) {
-  //     if (err) { throw err; }
-  
-  //     await res.render("home/dashboard", { title: "Home", userProfiles: userProfiles, user: user });
-  //     //console.log(userProfiles)
-  //   // })
-  //   })
-  //   },
-  
-  
    Logout: function (req, res) {
     req.session.user_id = null;
     if (req.session.user_id === null) {
