@@ -4,11 +4,11 @@ require('../mongodb_helper')
 var User = require('../../models/userAccount');
 
 describe('userAccount model', function() {
-  beforeEach(function(done) {
-    mongoose.connection.collections.useraccounts.drop(function() {
-      done();
-    });
-  });
+  // beforeEach(function(done) {
+  //   mongoose.connection.collections.useraccounts.drop(function() {
+  //     done();
+  //   });
+  // });
 
   it('register function', function(){
     var user = new User({ firstName: 'Sam', lastName:'Smith', age: 25, email: 'sam@test.co.uk' , password: 'testpassword123'});
@@ -17,6 +17,5 @@ describe('userAccount model', function() {
     expect(user.age).toEqual(25);
     expect(user.email).toEqual('sam@test.co.uk');
   });
-
 
 })
