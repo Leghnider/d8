@@ -1,6 +1,8 @@
 {{title}}
-<form id="edit-profile-form" action="" method="post" enctype="multipart/form-data">
-<input class="form-control" type="file" id="image" name="image">
+<form id="edit-profile-form" action="/user/{{user._id}}/edit" method="post" enctype="multipart/form-data">
+ <input type="hidden" name="_method" value="put">
+
+<input class="form-control" type="file" id="profilePic" name="profilePic">
 
  <label for="bio">Bio: </label>
   <input id="bio" type="text" name="bio" value="" required>
@@ -14,5 +16,9 @@
 
   <label for="age">Age: </label>
   <input type="number" id="age" name="age" min="18" max="100" required>
+    <input type="submit" value="Edit Bio">
+    <div class="backtoprofile">
+        <a href="/user/{{user._id}}">Back to Profile</a>
+      </div>
 
 </form>
