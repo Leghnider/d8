@@ -84,7 +84,6 @@ var HomeController = {
       .populate("UserAccount")
 
     await res.render("home/dashboard", { title: "Home", userProfiles: userProfiles, user: user });
-    
 
     },
    Logout: function (req, res) {

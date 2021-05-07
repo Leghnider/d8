@@ -1,10 +1,12 @@
 const UserProfile = require("../models/userProfile");
-// var User = require('../models/userAccount')
+const User = require('../models/userAccount')
 
 var ProfilesController = {
   ShowProfile: async (req, res) => {
     const profile = await UserProfile.findById(req.params.id)
-    res.render('profiles/show', { profile: profile })
+    const user = await User.findById(profile.useraccount)
+    const email = await user.email
+    res.render('profiles/show', { profile: profile, email: email })
   }
 };
 
