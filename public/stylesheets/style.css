@@ -1,8 +1,74 @@
 body {
-  padding: 50px;
   font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+  background-color: #fff;
 }
 
-a {
-  color: #00B7FF;
+#content {
+  min-height: calc(100vh - 40px);
 }
+
+#homepage-content section{
+  background-color: #e80d4a;
+}
+
+#homepage-navbar{
+  background-color: #e80d4a;
+  font-size: 1.25rem;
+}
+
+#homepage-navbar .nav-link{
+  color: #f6ce00;
+}
+
+#homepage-navbar .nav-link:hover{
+  color: white;
+}
+
+#homepage-navbar .btn-primary, .btn-primary:hover, .btn-primary:active, .btn-primary:visited {
+  background-color: #f6ce00 !important;
+  color: white;
+  border: #f6ce00;;
+}
+
+#footer{
+  width: 100%;
+  position: fixed;
+  bottom: 0;
+  background-color: #e80d4a;
+  color: white;
+}
+
+#footer a{
+  color: #f6ce00;
+}
+
+.form-signin {
+  width: 100%;
+  max-width: 330px;
+  padding: 15px;
+  margin: auto;
+}
+
+.form-signin .form-floating:focus-within {
+  z-index: 2;
+}
+
+.form-signin input[type="email"] {
+  margin-bottom: -1px;
+  border-bottom-right-radius: 0;
+  border-bottom-left-radius: 0;
+}
+
+.form-signin input[type="password"] {
+  margin-bottom: 10px;
+  border-top-left-radius: 0;
+  border-top-right-radius: 0;
+}
+
+.form-signin .btn-primary, .btn-primary:hover, .btn-primary:active, .btn-primary:visited {
+  background-color: #f6ce00 !important;
+  color: white;
+  border: #f6ce00;;
+}
+
+
