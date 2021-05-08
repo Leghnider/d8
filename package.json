@@ -23,6 +23,7 @@
     "express-session": "^1.17.1",
     "hbs": "^4.1.0",
     "http-errors": "~1.6.3",
+    "lodash": "^4.17.21",
     "mongoose": "^5.8.11",
     "morgan": "~1.9.1",
     "nodemon": "^1.19.4"

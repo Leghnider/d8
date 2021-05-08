@@ -17,5 +17,13 @@
   <p>Location: {{this.location}}</p>
   <p>Interested in: {{this.interested_in}}</p>
   <p>Bio: {{this.bio}}</p>
+   <p>
+                {{!-- {{#if (hasLiked this.likes userId._id)}} --}}
+                <form action='/user/liked/{{this.id}}' method='post'>
+                <input type="submit" value="Liked">
+                </form>
+                {{!-- {{/if}} --}}
+            <p class='liked'>Liked {{countLiked this.liked}}</p>
+              </p>
 </div>
 {{/each}}

@@ -4,6 +4,7 @@ var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 const session = require('express-session');
+const _ = require("lodash")
 
 
 var homeRouter = require('./routes/home');
@@ -11,10 +12,15 @@ var userRouter = require('./routes/user');
 var profilesRouter = require('./routes/profiles');
 
 var app = express();
+var hbs = require('hbs');
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'hbs');
+
+hbs.registerHelper('countLiked', (arrayOfIds) => {
+  return _.uniq(arrayOfIds).length;
+})
 
 //sessions
 app.use(
