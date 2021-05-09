@@ -30,6 +30,30 @@ body {
   border: #f6ce00;;
 }
 
+#navbar2{
+  background-color: #e80d4a;
+  font-size: 1.25rem;
+}
+
+#navbar2 .nav-link{
+  color: #f6ce00;
+}
+
+#navbar2 .nav-link:hover{
+  color: white;
+}
+
+#navbar2 .btn-primary, .btn-primary:hover, .btn-primary:active, .btn-primary:visited {
+  background-color: #f6ce00 !important;
+  color: white;
+  border: #f6ce00;;
+}
+
+#navbar2 #log-out-form .btn{
+  font-size: 18px;
+  color: #f6ce00;
+}
+
 #footer{
   width: 100%;
   position: fixed;
