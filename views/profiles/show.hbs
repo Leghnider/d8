@@ -3,7 +3,7 @@
   <section class="container-fluid">
     <div class="row py-4">
         <div class="col-md-6 d-flex justify-content-center py-3">
-          <div class="card" style="width: 27rem;">
+          <div class="card" style="width: 34rem;">
             {{#each profile.profileImages}}
               <img src="{{this.url}}" class="card-img-top-profile" alt="">
             {{/each}}
@@ -28,19 +28,4 @@
     </div>
   </section>
 </section>
-
-{{!-- <h1>More details about ... </h1>
-{{#each profile.profileImages}}
-  <img src="{{this.url}}" alt="image" class="class img-fluid" width="200" height="200" ;>
-{{/each}}
-<p>Username: {{profile.username}}</p>
-<p>Age: {{profile.age}}</p>
-<p>Gender: {{profile.gender}}</p>
-<p>Location: {{profile.gender}}</p>
-<p>Interested in: {{profile.interested_in}}</p>
-<p>Bio: {{profile.bio}}</p>
-<p>Email: {{email}}</p> --}}
-
-
-{{!-- Would need to add information from the other db inc email --}}
 
