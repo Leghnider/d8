@@ -101,5 +101,34 @@ body {
   object-fit: cover;
 }
 
+.card-body a{ 
+  color: #e80d4a;
+}
+
+.card{
+  border: #dd7e99 0.1px solid;
+}
+
+.card-btn{
+  background-color: #e80d4a !important;
+  border: #e80d4a;
+}
+
+#dashboard-page h1{
+  color: #e80d4a;
+}
+#dashboard-page a{
+  color: #e80d4a;
+}
+
+.card-img-top-profile{
+  width: 100%;
+  height: 35vw;
+  object-fit: cover;
+}
+
+#users-profile-page .btn-a a{
+  color: white !important;
+}
 
 
