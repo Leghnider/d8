@@ -95,4 +95,11 @@ body {
   border: #f6ce00;;
 }
 
+.card-img-top {
+  width: 100%;
+  height: 20vw;
+  object-fit: cover;
+}
+
+
 

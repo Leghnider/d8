@@ -1,28 +1,33 @@
 <section id="dashboard-page">
   {{> navbar2}}
-
-
+  <section class="container-fluid">
+    <div class="row py-2">
+      <a href="/user/{{user._id}}">{{user.firstName}}</a>
+      <h1>Your Potential D8s</h1>
+    </div>
+    <div class="row py-2">
+      {{#each userProfiles}}
+        <div class="col-lg-4 col-md-6 col-12 py-2">
+          <div class="card mx-auto" style="width: 20rem;">
+            <div class="card-img-top">
+              {{#each this.profileImages}}
+              <img class="card-img-top img-fluid" src="{{this.url}}" alt="Card image cap" class="class img-fluid";>
+              {{/each}}
+            </div>
+            <div class="card-body">
+              <h5><a style="text-decoration: none;" href="/profiles/{{this._id}}">{{this.username}}</a></h5>
+              {{!-- <p class="card-text">Age: {{this.age}}</p>
+              <p class="card-text">Gender: {{this.gender}}</p>
+              <p class="card-text">Interested in: {{this.interested_in}}</p>
+              <p class="card-text">Location: {{this.location}}</p> --}}
+              <p class="card-text">{{this.bio}}</p>
+            </div>
+            <button type="button" class="btn btn-primary">Like</button>
+          </div>   
+        </div>
+      {{/each}}
+    </div>
+    <div class="row py-6" style="height: 5rem;">
+    </div>
+  </section>
 </section>
-
-
-{{!-- This will have a list of all the profiles --}}
-<h1>Your Potential D8s</h1>
-
-<p>
-<form id="log-out-form" action="/logout" method="post">
-  <button value="Log Out"> Log Out </button>
-</form>
-</p>
-
-<a href="/user/{{user._id}}">{{user.firstName}}</a>
-
-{{#each userProfiles}}
-<div style="border: 1px solid black">
-  <p><a href="/profiles/{{this._id}}">Username: {{this.username}}</a></p>
-  <p>Age: {{this.age}}</p>
-  <p>Gender: {{this.gender}}</p>
-  <p>Location: {{this.location}}</p>
-  <p>Interested in: {{this.interested_in}}</p>
-  <p>Bio: {{this.bio}}</p>
-</div>
-{{/each}}
