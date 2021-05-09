@@ -134,3 +134,32 @@ body {
 .card-title-title{
   color: #e80d4a;
 }
+
+.form-register {
+  width: 100%;
+  max-width: 1000px;
+  padding: 15px;
+  margin: auto;
+}
+
+.form-register .form-floating:focus-within {
+  z-index: 2;
+}
+
+.form-register input[type="email"] {
+  margin-bottom: -1px;
+  border-bottom-right-radius: 0;
+  border-bottom-left-radius: 0;
+}
+
+.form-register input[type="password"] {
+  margin-bottom: 10px;
+  border-top-left-radius: 0;
+  border-top-right-radius: 0;
+}
+
+.form-register .btn-primary, .btn-primary:hover, .btn-primary:active, .btn-primary:visited {
+  background-color: #f6ce00 !important;
+  color: white;
+  border: #f6ce00;;
+}
