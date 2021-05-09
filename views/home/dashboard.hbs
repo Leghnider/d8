@@ -17,13 +17,18 @@
   <p>Location: {{this.location}}</p>
   <p>Interested in: {{this.interested_in}}</p>
   <p>Bio: {{this.bio}}</p>
-   <p>
-                {{!-- {{#if (hasLiked this.likes userId._id)}} --}}
-                <form action='/user/liked/{{this.id}}' method='post'>
-                <input type="submit" value="Liked">
-                </form>
-                {{!-- {{/if}} --}}
-            <p class='liked'>Liked {{countLiked this.liked}}</p>
-              </p>
+   <div style="display: flex;">
+      <form action='/user/disliked/{{this.id}}' method='post'>
+    <button style="background-color:white; border: white"type="submit"><i class= "fas fa-times fa-2x" style="color:rgb(215, 83, 83)"></i></button>
+  </form>
+  
+    {{!-- {{#if (hasLiked this.likes userId._id)}} --}}
+   <form action='/user/liked/{{this.id}}' method='post'>
+   <button style="background-color:white; border: white"type="submit"><i class= "fas fa-heart fa-2x" style="color:rgb(95, 191, 95)"></i></button>
+  </form>
+</div>
+    <br>
+   {{!-- {{/if}} --}}
+  <p class='likes_recieved'>Liked {{countlikes_recieved this.likes_recieved}}</p>
 </div>
 {{/each}}

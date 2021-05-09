@@ -4,7 +4,7 @@ var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 const session = require('express-session');
-const _ = require("lodash")
+const _ = require("lodash");
 
 
 var homeRouter = require('./routes/home');
@@ -18,7 +18,7 @@ var hbs = require('hbs');
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'hbs');
 
-hbs.registerHelper('countLiked', (arrayOfIds) => {
+hbs.registerHelper('countlikes_recieved', (arrayOfIds) => {
   return _.uniq(arrayOfIds).length;
 })
 
@@ -26,8 +26,8 @@ hbs.registerHelper('countLiked', (arrayOfIds) => {
 app.use(
 	session({
 		secret: "keyboard cat",
-	}),
-  );
+}),
+);
 
 app.use(logger('dev'));
 app.use(express.json());

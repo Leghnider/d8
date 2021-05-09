@@ -1,6 +1,6 @@
 var mongoose = require('mongoose');
 // var Schema = mongoose.Schema
-var _ = require("lodash")
+// var _ = require("lodash")
 
 var UserProfileSchema = new mongoose.Schema({
   useraccount: [ {
@@ -30,18 +30,14 @@ var UserProfileSchema = new mongoose.Schema({
   interested_in:[{
     type: String,
   }],
-  liked: [{ type: String }]
+  liked: [{ type: String }],
+  likes_recieved: [{type: String}]
 
 })
 
-UserProfileSchema.pre('save', function (next) {
-	console.log([...this.liked])
-  this.liked = _.uniq(this.liked.map((like) => like.toString()));
-	console.log(this.liked)
-  next();
-});
+
 
 
 
 var UserProfile = mongoose.model('UserProfile', UserProfileSchema);
-module.exports = UserProfile; 
+module.exports = UserProfile 

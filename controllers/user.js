@@ -23,9 +23,12 @@ var UserController = {
 		if (!req.session.user_id) {
 			res.redirect("/login");
 		}
-		const user = await User.findById(req.session.user_id);
+    const user = await User.findById(req.session.user_id);
+		const userInfo = await UserProfile.findOne({
+			useraccount: { _id: req.session.user_id },
+		});
 
-		res.render("user/edit", { title: "Edit Profile", user: user });
+		res.render("user/edit", { title: "Edit Profile", user: user, userInfo: userInfo });
 	},
 
 	UpdateProfile: async (req, res) => {
@@ -34,7 +37,7 @@ var UserController = {
 		}
 		const userInfo = await UserProfile.findOne({
 			useraccount: { _id: req.session.user_id },
-		})
+		});
 		const userProfile = await UserProfile.findByIdAndUpdate(userInfo._id, {
 			// profilePicture: req.body.profilePic,
 			bio: req.body.bio,
@@ -45,22 +48,43 @@ var UserController = {
 		res.status(201).redirect(`/user/${req.session.user_id}`);
 	},
 
-	LikeProfile: async function (req, res) {
-    UserProfile.findByIdAndUpdate(
-			{ _id: req.params.id },
-			{ $push: { liked: req.session.user_id.toString() } },
-			function (err, like) {
-				like.save((saveErr) => {
-					if (saveErr) {
-						throw saveErr;
-					}
-					return res.status(200).redirect("/home");
-				});
-			}
-		);
-	},
-		
-};
+  LikeProfile: async function (req, res) {
+    await UserProfile.findByIdAndUpdate(
+      { _id: req.params.id },
+      { $addToSet: { likes_recieved: req.session.user_id.toString() } }
+    );
+
+    const userInfo = await UserProfile.findOne({
+      useraccount: { _id: req.session.user_id },
+    });
+    const liked = await UserProfile.findByIdAndUpdate(userInfo, {
+      $addToSet: { liked: req.params.id.toString() },
+    });
+    console.log(req.session.user_id);
+    console.log(liked);
+    // if (saveErr) {
+    // 	throw saveErr;}
+    return res.status(200).redirect("/home");
+  },
+  DislikeProfile: async function (req, res) {
+    await UserProfile.findByIdAndUpdate(
+      { _id: req.params.id },
+      { $pull: { likes_recieved: req.session.user_id.toString() } }
+    );
+
+    const userInfo = await UserProfile.findOne({
+      useraccount: { _id: req.session.user_id },
+    });
+    const liked = await UserProfile.findByIdAndUpdate(userInfo, {
+      $pull: { liked: req.params.id.toString() },
+    });
+    console.log(req.session.user_id);
+    console.log(liked);
+    // if (saveErr) {
+    // 	throw saveErr;}
+    return res.status(200).redirect("/home");
+  },
+}
 		
 	
 
