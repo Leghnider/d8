@@ -100,8 +100,10 @@ var HomeController = {
     }
 
     await res.render("home/dashboard", { title: "Home", userProfiles: searchResults, user: user });
-    },
-
+  },
+  Filter: async(req, res) => {
+    res.render('profiles/filtered')
+  },
    Logout: function (req, res) {
     req.session.user_id = null;
     if (req.session.user_id === null) {
