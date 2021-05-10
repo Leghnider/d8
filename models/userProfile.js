@@ -31,7 +31,8 @@ var UserProfileSchema = new mongoose.Schema({
     type: String,
   }],
   liked: [{ type: String }],
-  likes_recieved: [{type: String}]
+  likes_received: [{type: String}],
+  matched: [{ type: String }]
 
 })
 

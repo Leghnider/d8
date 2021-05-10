@@ -18,7 +18,7 @@ var hbs = require('hbs');
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'hbs');
 
-hbs.registerHelper('countlikes_recieved', (arrayOfIds) => {
+hbs.registerHelper('countlikes_received', (arrayOfIds) => {
   return _.uniq(arrayOfIds).length;
 })
 
