@@ -1,6 +1,7 @@
 var User = require("../models/userAccount");
 var UserProfile = require("../models/userProfile");
 const bcrypt = require("bcrypt");
+const require('passport')
 
 var HomeController = {
   Index: function (req, res) {
@@ -74,6 +75,12 @@ var HomeController = {
     else{
       res.redirect('/login');
     }
+  },
+
+  Google: function(req, res) {
+    res.redirect('/google').passport.authenticate("google", {
+      scope: ['profile']
+    })
   },
 
   Dashboard: async function (req, res) {

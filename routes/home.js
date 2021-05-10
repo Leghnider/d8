@@ -11,6 +11,7 @@ router.post('/register-profile', HomeController.CreateProfile);
 router.get('/login', HomeController.Login);
 router.post('/logout', HomeController.Logout)
 router.post('/login', HomeController.Authenticate);
+router.get('/google', HomeController.Google);
 router.get('/home', HomeController.Dashboard);
 
 
