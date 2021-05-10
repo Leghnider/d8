@@ -85,7 +85,7 @@ var HomeController = {
   
     userProfiles = await UserProfile.find({})
       .populate("UserAccount")
-
+    console.log(userProfiles)
     await res.render("home/dashboard", { title: "Home", userProfiles: userProfiles, user: user });
 
     },

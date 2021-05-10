@@ -69,20 +69,23 @@ var UserController = {
 			_id: req.params.id,
 		});
 
-		console.log(otherUser);
-		console.log(otherUser.liked);
 		var isMatched;
+		var likeArray = otherUser.liked;
 
-		for (var i = 0; i < otherUser.liked.length; i++) {
-			if (otherUser.liked[userInfo._id]) {
+		for (var i = 0; i < likeArray.length; i++) {
+			if (likeArray.includes(userInfo._id)){
 				isMatched = true;
 			}
 		}
-		if (isMatched === true) {
-			otherUser.update({ matched: userInfo._id });
-			userInfo.update({ matched: req.params.id });
-		}
 
+		if (isMatched === true) {
+			await UserProfile.findByIdAndUpdate(otherUser, {
+				$push: {matched: userInfo._id}
+			})
+			await UserProfile.findByIdAndUpdate(userInfo, {
+				$push: {matched: req.params.id}
+			})
+		}
 		return res.status(200).redirect("/home");
 	},
 	//   DislikeProfile: async function (req, res) {
