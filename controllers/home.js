@@ -102,7 +102,40 @@ var HomeController = {
     await res.render("home/dashboard", { title: "Home", userProfiles: searchResults, user: user });
   },
   Filter: async(req, res) => {
-    res.render('profiles/filtered')
+    console.log(req.query)
+    var minage = 18;
+    var maxage = 100;
+    if (req.query.minage !== ""){
+      minage = Number(req.query.minage)
+    }
+    if (req.query.maxage !== ""){
+      maxage = Number(req.query.maxage)
+    }
+    // similar to the dashboard results 
+    const user = await User.findById(req.session.user_id);
+
+    var user_profile_details = await UserProfile.findOne({
+			useraccount: { _id: req.session.user_id },
+		});
+    var searchResults = null; 
+
+    if (user_profile_details.gender === "Male" && user_profile_details.interested_in[0] === "Men"){
+      searchResults = await UserProfile.find({gender: 'Male', interested_in: 'Men', age: {$gte: minage, $lte: maxage} })
+    } 
+    else if (user_profile_details.gender === "Male" && user_profile_details.interested_in[0] === "Women"){
+      searchResults = await UserProfile.find({gender: 'Female', interested_in: 'Men', age: {$gte: minage, $lte: maxage}})
+    }
+    else if (user_profile_details.gender === "Female" && user_profile_details.interested_in[0] === "Women"){
+      searchResults = await UserProfile.find({gender: 'Female', interested_in: 'Women', age: {$gte: minage, $lte: maxage}})
+    } 
+    else if (user_profile_details.gender === "Female" && user_profile_details.interested_in[0] === "Men"){
+      searchResults = await UserProfile.find({gender: 'Male', interested_in: 'Women', age: {$gte: minage, $lte: maxage}})
+    }
+
+    console.log(searchResults)
+
+
+    res.render('profiles/filtered', {title:"Filtered Profiles", searchResults: searchResults})
   },
    Logout: function (req, res) {
     req.session.user_id = null;

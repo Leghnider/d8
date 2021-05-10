@@ -9,18 +9,18 @@
       <form class="filterResults" action="/filtered" method="get">
         <p>Age</p>
         <label for="minage">Min Age:</label>
-        <input id="minage" type="number" name="minage" min="18" max="100">
+        <input id="minage" type="number" name="minage" min="18" max="100" placeholder="18">
         <label for="maxage">Min Age:</label>
-        <input id="maxage" type="number" name="maxage" min="18" max="100">
+        <input id="maxage" type="number" name="maxage" min="18" max="100" placeholder="100">
         <p>Location: </p>
         <label for="location1">North London</label>
-        <input type="checkbox" id="location1" name="location1" value="North London">
-        <label for="location1">West London</label>
-        <input type="checkbox" id="location2" name="location2" value="West London">
-        <label for="location1">South London</label>
-        <input type="checkbox" id="location3" name="location3" value="South London">
-        <label for="location1">East London</label>
-        <input type="checkbox" id="location4" name="location4" value="East London">
+        <input type="checkbox" id="location1" name="location" value="North London">
+        <label for="location2">West London</label>
+        <input type="checkbox" id="location2" name="location" value="West London">
+        <label for="location3">South London</label>
+        <input type="checkbox" id="location3" name="location" value="South London">
+        <label for="location4">East London</label>
+        <input type="checkbox" id="location4" name="location" value="East London">
         <input type="submit" value="Filter Results">
       </form>
     </div>
