@@ -2,6 +2,7 @@ var User = require("../models/userAccount");
 var UserProfile = require("../models/userProfile");
 const bcrypt = require("bcrypt");
 
+
 var HomeController = {
   Index: function (req, res) {
     res.render("home/index", { title: "d8" });
@@ -27,7 +28,6 @@ var HomeController = {
       } else {
       // redirect this to the next registration page
       req.session.user_id = user._id
-      console.log(req.session.user_id)
       res.status(201).redirect("/register-profile");
    } });
   },
@@ -38,7 +38,6 @@ var HomeController = {
     const user = await User.findById(req.session.user_id);
     const { username, bio, location, gender, age, interested_in } = req.body;
 
-    //need to add the persisting information of the user and picture
     var userProfile = new UserProfile({
       username,
       bio,
@@ -47,13 +46,14 @@ var HomeController = {
       age,
       interested_in,
       useraccount: user._id
-
     });
 
-    await userProfile.save(function (err) {
+    userProfile.profileImages = req.files.map(f => ({ url: f.path, filename: f.filename }));
+    await userProfile.save(function(err){
       if (err) {
         throw err;
       }
+      console.log(userProfile);
       res.status(201).redirect("/home");
     });
   },
@@ -77,9 +77,9 @@ var HomeController = {
   },
 
   Dashboard: async function (req, res) {
-    if (!req.session.user_id) {
-			res.redirect("/login");
-    }
+    // if (!req.session.user_id) {
+		// 	res.redirect("/login");
+    // }
     const user = await User.findById(req.session.user_id);
     let userProfiles = null;
   

@@ -1,14 +1,30 @@
-<h1>More details about ... </h1>
+<section id="users-profile-page">
+  {{> navbar2}}
+  <section class="container-fluid">
+    <div class="row py-4">
+        <div class="col-md-6 d-flex justify-content-center py-3">
+          <div class="card" style="width: 34rem;">
+            {{#each profile.profileImages}}
+              <img src="{{this.url}}" class="card-img-top-profile" alt="">
+            {{/each}}
+            <div class="card-body">
+              <button type="button" class="btn btn-primary card-btn">Like</button>               <button type="button" class="btn btn-primary card-btn btn-a"><a style="text-decoration: none;" href="/home">Back to Dashboard</a></button>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-6 d-flex justify-content-center py-3">
+          <div class="card" style="width: 34rem;">
+            <div class="card-body">
+              <h5 class="card-title">{{profile.username}}</h5>
+              <p class="card-text">{{profile.age}} years old {{profile.gender}} living in {{profile.location}}</p>
+              <p class="card-text">Interested in {{profile.interested_in}}</p>
+              <p class="card-text">{{profile.bio}}</p> 
+              <p class="card-text">Contact them on: {{email}}</p>
+            </div>
+          </div>
+        </div>
+    <div class="row py-4" >
+    </div>
+  </section>
+</section>
 
-<p>Username: {{profile.username}}</p>
-<p>Age: {{profile.age}}</p>
-<p>Gender: {{profile.gender}}</p>
-<p>Location: {{profile.gender}}</p>
-<p>Interested in: {{profile.interested_in}}</p>
-<p>Bio: {{profile.bio}}</p>
-<p>Email: {{email}}</p>
-
-
-{{!-- Would need to add information from the other db inc email --}}
-
-<a href="/home">Back to Dashboard</a>

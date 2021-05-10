@@ -1,11 +1,32 @@
-<h1>Log In</h1>
+{{> navbar}}
 
-<form id="log-in-form" action="/login" method="post">
-  <label for="email">Email: </label>
-  <input id="email" type="text" name="email" value="" required>
-  <label for="password">Password: </label>
-  <input id="password" type="password" name="password" value="" required>
-  <input type="submit" value="Submit">
-</form>
+<div class="content-container container">
+  <main class="form-signin">
+    <div class="row py-3">
+      <div class="col-12 align-items-centre">
+        <img class="mb-4 image-fluid" style="max-width: 300px;" src="images/LogoMakr-5XstTZ.png" alt="" >
+      </div>
+    </div>
+    <form id="log-in-form" action="/login" method="post">
+      
+      <h1 class="h4 mb-3 fw-normal">Please log in</h1>
 
-{{!-- <h3>Haven't got an account, please <a class="sign-up-link" href="">Register</a></h3> --}}
+      <div class="form-floating">
+        <input id="email" type="email" name="email" class="form-control" id="floatingInput" placeholder="name@example.com" required>
+        <label for="floatingInput">Email address</label>
+      </div>
+      <div class="form-floating">
+        <input id="password" type="password" name="password" class="form-control" id="floatingPassword" placeholder="Password" required>
+        <label for="floatingPassword">Password</label>
+      </div>
+
+      <button class="w-100 btn btn-lg btn-primary" type="submit">Log in</button>
+    </form>
+        <div class="row py-3">
+      <div class="col-12 align-items-centre">
+        <p style="max-width: 300px;" >Haven't got an account yet? 
+          <a class="sign-up-link" style="color:  #e80d4a;" href="http:/register">Sign up</a></p>
+      </div>
+    </div>
+  </main> 
+</div>

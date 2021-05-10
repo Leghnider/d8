@@ -1,3 +1,62 @@
+
+{{> navbar}}
+<div class="content-container container">
+  <main class="form-register">
+
+    <div class="row py-3">
+      <img class="mb-4 image-fluid mx-auto" style="max-width: 300px;" src="images/LogoMakr-5XstTZ.png" alt="" >
+    </div>
+
+    <div class="row py-3">
+      <form id="register-profile-form" action="/register-profile" method="post" enctype="multipart/form-data">
+      <h1 class="h4 mb-3 fw-normal">Create your profile</h1>
+      <p>Your profile will be visible to other users</p>
+
+      <div class="row">
+        <div class="form-floating col-md-4 py-1">
+          <input id="username" type="text" name="username" class="form-control" id="floatingUsername" placeholder="Username" required>
+          <label for="floatingUsername">Username</label>
+        </div>
+        <div class="form-floating col-md-4 py-1">
+          <input id="location" type="text" name="loaction" class="form-control" id="floatingLocation" placeholder="North London" required>
+          <label for="floatingLocation">Location</label>
+        </div>
+        <div class="form-floating col-md-4 py-1">
+          <input id="age" type="number" name="age" min="18" max="100" class="form-control" id="floatingAge" placeholder="Doe" required>
+          <label for="floatingAge">Age</label>
+        </div>
+      </div>
+
+      <div class="row py-2">
+        <div class="form-floating col-md-4 py-1">
+          <input id="gender" type="text" name="gender" class="form-control" id="floatingGender" placeholder="Man" required>
+          <label for="floatingGender">Gender</label>
+        </div>
+        <div class="form-floating col-md-4 py-1">
+          <input id="interested_in" type="text" name="interested_in" class="form-control" id="floatinginterested_in" placeholder="Women" required>
+          <label for="floatinginterested_in">Interested in</label>
+        </div>
+        <div class="col-md-4 py-1">
+          <label for="profileImage">Upload a profile picture</label>
+          <input style="margin-top: 10px"type='file' name="profileImage" id="profileImage">
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-8 mx-auto py-1 mb-4">
+          <label for="bio">Bio</label>
+          <textarea class="form-control" id="bio" type="text" name="bio" value="" rows="3"></textarea>
+        </div>
+      </div>
+
+      <button class="w-100 btn btn-lg btn-primary" type="submit">Create your profile</button>
+      </form>
+    </div>
+    <div class="row py-4">
+    </div>
+  </main>
+</div>
+{{!--
 {{!-- This is the view where they Register their Profile --}}
 
 <h1>Create you Profile</h1>
@@ -70,3 +129,4 @@
 
 
 {{!-- Submit button will go to the dashboard page --}}
+--}}
