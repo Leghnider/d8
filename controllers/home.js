@@ -86,9 +86,6 @@ var HomeController = {
 		});
     var searchResults = null; 
 
-    console.log(user_profile_details.gender)
-    console.log(user_profile_details.interested_in[0])
-
     if (user_profile_details.gender === "Male" && user_profile_details.interested_in[0] === "Men"){
       searchResults = await UserProfile.find({gender: 'Male', interested_in: 'Men'})
     } 
