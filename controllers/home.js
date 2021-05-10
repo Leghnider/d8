@@ -53,7 +53,6 @@ var HomeController = {
       if (err) {
         throw err;
       }
-      console.log(userProfile);
       res.status(201).redirect("/home");
     });
   },
