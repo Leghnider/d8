@@ -5,26 +5,66 @@
 {{!-- Forms here to collect information from the user --}}
 
 <form id="register-profile-form" action="/register-profile" method="post">
-  <label for="username">Username: </label>
-  <input id="username" type="text" name="username" value="" required>
-
-  <label for="bio">Write a bit about yourself: </label>
+<div>
+  <p>
+    <label for="username">Username: </label>
+  </p>
+  <input id="username" type="text" name="username" value="" required>  
+</div>
+<div>
+  <p>
+    <label for="bio">Write a bit about yourself: </label>
+  </p>  
   <input id="bio" type="text" name="bio" value="" required>
+</div>  
+  
+<div>
+  <p>
+    <label for="location">Location: </label>
+  </p>
+  <select id="locaton" name="location">
+    <option value="North London"> North London </option>
+    <option value="West London"> West London </option>
+    <option value="South London"> South London </option>
+    <option value="East London"> East London </option>
+  </select>
+  {{!-- <input id="location" type="text" name="location" value="" required> --}}
+</div>
+<div>
+  <p>
+    <label for="age">Age: </label>
+  </p>
+  
+  <input id="age" type="number" name="age" value="" min="18" required>
+</div>
+<div>
+  <p>
+   <label for="gender">Gender: </label> 
+  </p>
+  <input type="radio" id="male" name="gender" value="male">
+    <label for="male">Male</label><br>
+  <input type="radio" id="female" name="gender" value="female">
+    <label for="female">Female</label><br>
+  <input type="radio" id="rathernot" name="gender" value="rathernot">
+    <label for="other">Rather Not Say</label>
+</div>
 
-  <label for="location">Location: </label>
-  <input id="location" type="text" name="location" value="" required>
+<div>
+  <p>
+   <label for="interested_in">Interested In: </label> 
+  </p>
+   
+     <input type="radio" id="male" name="gender" value="male">
+      <label for="men">Men</label><br>
+    <input type="radio" id="female" name="gender" value="female">
+      <label for="women">Women</label><br>
+    <input type="radio" id="rathernot" name="gender" value="rathernot">
+      <label for="doesntmatter">Doesn't Matter</label>
+</div>
 
-  <label for="age">Age: </label>
-  <input id="age" type="text" name="age" value="" required>
-
-  <label for="gender">Gender: </label>
-  <input id="gender" type="text" name="gender" value="" required>
-
-  <label for="interested_in">Interested In: </label>
-  <input id="interested_in" type="text" name="interested_in" value="" required>
-
-  <input type="submit" value="Create Account">
-
+<div>
+   <input type="submit" value="Create Account"> 
+</div>
   {{!-- Need to ability to add a profile picture here leave this till I have most of it working --}}
 </form>
 
