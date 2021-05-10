@@ -29,7 +29,20 @@ var UserProfileSchema = new mongoose.Schema({
   interested_in:[{
     type: String,
   }]
-})
+});
+
+UserProfileSchema.statics.findOrCreate = function findOrCreate(profile, cb){
+  var userObj = new this();
+  this.findOne({_id : profile.id},function(err,result){ 
+      if(!result){
+          userObj.firstName = profile.displayName;
+          //....
+          userObj.save(cb);
+      }else{
+          cb(err,result);
+      }
+  });
+};
 
 var UserProfile = mongoose.model('UserProfile', UserProfileSchema);
 module.exports = UserProfile; 

@@ -91,6 +91,7 @@ var HomeController = {
     },
    Logout: function (req, res) {
     req.session.user_id = null;
+    req.logout();
     if (req.session.user_id === null) {
       res.redirect('/login');
     }
