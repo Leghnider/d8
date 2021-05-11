@@ -124,23 +124,25 @@ var HomeController = {
 
     if (user_profile_details.gender === "Male" && user_profile_details.interested_in[0] === "Men"){
       searchResults = await UserProfile.find({ 
-        _id: { $ne: user_profile_details._id }, 
+        _id: { $ne: user_profile_details._id, $nin: user_profile_details.liked },
         gender: 'Male', 
         interested_in: 'Men' })
     } 
     else if (user_profile_details.gender === "Male" && user_profile_details.interested_in[0] === "Women"){
       searchResults = await UserProfile.find({ 
+        _id: { $nin: user_profile_details.liked },
         gender: 'Female', 
         interested_in: 'Men' })
     }
     else if (user_profile_details.gender === "Female" && user_profile_details.interested_in[0] === "Women"){
       searchResults = await UserProfile.find({ 
-        _id: { $ne: user_profile_details._id }, 
+        _id: { $ne: user_profile_details._id, $nin: user_profile_details.liked },
         gender: 'Female', 
         interested_in: 'Women' })
     } 
     else if (user_profile_details.gender === "Female" && user_profile_details.interested_in[0] === "Men"){
       searchResults = await UserProfile.find({
+        _id: { $nin: user_profile_details.liked },
         gender: 'Male', 
         interested_in: 'Women'})
     }
@@ -172,7 +174,7 @@ var HomeController = {
 
     if (user_profile_details.gender === "Male" && user_profile_details.interested_in[0] === "Men"){
       searchResults = await UserProfile.find({
-        _id: { $ne: user_profile_details._id },
+        _id: { $ne: user_profile_details._id, $nin: user_profile_details.liked },
         gender: 'Male',
         interested_in: 'Men', 
         age: {$gte: minage, $lte: maxage}, 
@@ -180,6 +182,7 @@ var HomeController = {
     } 
     else if (user_profile_details.gender === "Male" && user_profile_details.interested_in[0] === "Women"){
       searchResults = await UserProfile.find({
+        _id: { $nin: user_profile_details.liked },
         gender: 'Female',
         interested_in: 'Men', 
         age: {$gte: minage, $lte: maxage}, 
@@ -187,7 +190,7 @@ var HomeController = {
     }
     else if (user_profile_details.gender === "Female" && user_profile_details.interested_in[0] === "Women"){
       searchResults = await UserProfile.find({
-        _id: { $ne: user_profile_details._id },
+        _id: { $ne: user_profile_details._id, $nin: user_profile_details.liked },
         gender: 'Female', 
         interested_in: 'Women', 
         age: {$gte: minage, $lte: maxage}, 
@@ -195,6 +198,7 @@ var HomeController = {
     } 
     else if (user_profile_details.gender === "Female" && user_profile_details.interested_in[0] === "Men"){
       searchResults = await UserProfile.find({
+        _id: { $nin: user_profile_details.liked },
         gender: 'Male', 
         interested_in: 'Women', 
         age: {$gte: minage, $lte: maxage}, 
