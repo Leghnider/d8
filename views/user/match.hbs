@@ -1,6 +1,9 @@
 {{#each userProfile}}
 
-{{this.username}}
+{{#each this.matched}}
+    {{this.profileImages}}
+    {{this.username}}
+{{/each}}
 
 
 {{/each}}
@@ -9,8 +12,3 @@
 {{this.username}}
 
 {{/each}}
-
-
-
-
-
