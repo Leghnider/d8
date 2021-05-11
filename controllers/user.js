@@ -108,24 +108,28 @@ var UserController = {
 	//   },
 
 	MatchProfile: async (req, res) => {
-		if (!req.session.user_id) {
-			res.redirect("/login");
-		} else {
+		// if (!req.session.user_id) {
+		// 	res.redirect("/login");
+		// } else {
 	const user = await User.findById(req.session.user_id);
-		const userProfile = await UserProfile.find({
-			useraccount: { _id: req.session.user_id },
-		}).populate("matched")
-		const matchProfile = await userProfile.find({_id:  {$all: UserProfile.matched}})
+			const userProfile = await UserProfile.findOne({
+			useraccount: { _id: req.session.user_id }})
+			const matchProfile = await UserProfile.find({_id:  {$all: userProfile.matched}})
+
+	// 	const userProfile = await UserProfile.find({
+	// 		useraccount: { _id: req.session.user_id },
+	// 	}).populate("matched")
+		// const matchProfile = await userProfile.find({_id:  {$all: UserProfile.matched}})
 		res.render("user/match", {
-			title: "Profiles",
+			// title: "Profiles",
 			userProfile: userProfile,
-      user: user,
+      // user: user,
 			matchProfile: matchProfile
-		});
-	}
-	}
+		}
+	);
+		}
+	// }
 	
- 
 };
 
 
