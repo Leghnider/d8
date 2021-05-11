@@ -112,9 +112,6 @@ var UserController = {
 			useraccount: { _id: req.session.user_id }
 		})
 
-		console.log(userProfile._id)
-		console.log(req.params.id)
-
 		await UserProfile.findOneAndUpdate(
 			{ _id: userProfile._id }, 
 			{$pull: {matched: req.params.id, liked: req.params.id} 
@@ -129,6 +126,11 @@ var UserController = {
 	},
 	BlockProfile: async function(req, res){
 		console.log('route working')
+
+
+
+
+
 		return res.status(200).redirect(`/user/${req.session.user_id}`);
 	}
 	
