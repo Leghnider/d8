@@ -1,5 +1,8 @@
 var UserProfile = require("../models/userProfile");
 var User = require("../models/userAccount");
+const { socketapi } = require("../socketapi");
+const io = require('socket.io')
+
 // const UserAccount = require("../models/userAccount");
 // var UserMatch = require('../models/userMatch')
 
@@ -128,6 +131,27 @@ var UserController = {
       });
     }
   },
-};
+  ChatPage: async (req, res) => {
+    if (!req.session.user_id) {
+      res.redirect("/login");
+    }
+      const userProfile = await UserProfile.findOne({
+        useraccount: { _id: req.session.user_id },
+      });
+      const roomId = `room-${userProfile._id}-${req.params.id}`
+      
+      var socket = io();
+
+      socket.on('create', function (room_id) {
+        socket.join(room_id);
+      });
+   
+      
+      res.render('user/chat', {userProfile: userProfile, roomId: roomId} )
+    
+    }
+
+  }
+
 
 module.exports = UserController;

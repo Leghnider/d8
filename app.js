@@ -8,6 +8,7 @@ var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 const session = require('express-session');
+var socketapi = require("./socketapi");
 
 
 var homeRouter = require('./routes/home');
@@ -61,4 +62,4 @@ app.use(function(err, req, res) {
   res.render('error');
 });
 
-module.exports = app;
+module.exports = { app, socketapi }
