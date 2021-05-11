@@ -106,6 +106,9 @@ var UserController = {
 	//     // 	throw saveErr;}
 	//     return res.status(200).redirect("/home");
 	//   },
+	
+ 
 };
+
 
 module.exports = UserController;

@@ -29,5 +29,6 @@ router.post("/login", HomeController.Authenticate);
 router.get("/home", HomeController.Dashboard);
 
 router.get('/filtered', HomeController.Filter);
+router.get('/match/:id', HomeController.MatchProfile)
 
 module.exports = router;
