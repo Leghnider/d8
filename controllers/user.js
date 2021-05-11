@@ -1,5 +1,7 @@
 var UserProfile = require("../models/userProfile");
 var User = require("../models/userAccount");
+const PersonalityQuestionnaire = require('../models/personalityQuestionnaire')
+
 
 var UserController = {
 	UserProfile: async (req, res) => {
@@ -7,13 +9,16 @@ var UserController = {
 			res.redirect("/login");
 		}
 		const user = await User.findById(req.session.user_id);
-		const userProfile = await UserProfile.find({
+		const userProfile = await UserProfile.findOne({
 			useraccount: { _id: req.session.user_id },
 		});
+		const questionsAnswers = await PersonalityQuestionnaire.findOne({userprofile: {_id: userProfile._id}})
+		console.log(userProfile._id)
 		res.render("user/index", {
 			title: "Profiles",
 			user: user,
 			userProfile: userProfile,
+			questionsAnswers: questionsAnswers,
 		});
 	},
 	EditProfile: async (req, res) => {

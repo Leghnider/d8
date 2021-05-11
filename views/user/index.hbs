@@ -1,11 +1,10 @@
 <section id="users-profile-page">
   {{> navbar2}}
-  {{#each userProfile}}
   <section class="container-fluid">
     <div class="row py-4">
         <div class="col-md-6 d-flex justify-content-center py-3">
           <div class="card" style="width: 34rem;">
-            {{#each this.profileImages}}
+            {{#each userProfile.profileImages}}
               <img src="{{this.url}}" class="card-img-top-profile" alt="">
             {{/each}}
             <div class="card-body">
@@ -17,23 +16,27 @@
           <div class="card" style="width: 34rem;">
             <div class="card-body">
               <h5 class="card-title card-title-title">Your Profile</h5>
-              <h5 class="card-title">{{this.username}}</h5>
-              <p class="card-text">{{this.age}} years old</p>
-              <p class="card-text">{{this.gender}}</p>
-              <p class="card-text">Living in {{this.location}}</p>
-              <p class="card-text">Interested in {{this.interested_in}}</p>
-              <p class="card-text">{{this.bio}}</p> 
+              <h5 class="card-title">{{userProfile.username}}</h5>
+              <p class="card-text">{{userProfile.age}} years old</p>
+              <p class="card-text">{{userProfile.gender}}</p>
+              <p class="card-text">Living in {{userProfile.location}}</p>
+              <p class="card-text">Interested in {{userProfile.interested_in}}</p>
+              <p class="card-text">{{userProfile.bio}}</p> 
               <button type="button" class="btn btn-primary card-btn btn-a"><a style="text-decoration: none;" href="/user/{{../user._id}}/edit">Edit Your Profile</a></button>
             </div>
           </div>
-          <div class="card" style="width: 34rem;">
-            <h3 class="card-text"> A little more about me </h3>
-          </div>
+        </div>
+        <div class="card" style="width: 34rem;">
+          <h3 class="card-text"> Questions Answered </h3>
+          <p>Q1. {{questionsAnswers.q1}}</p>
+          <p>Q2. {{questionsAnswers.q2}}</p>
+          <p>Q3. {{questionsAnswers.q3}}</p>
+          <p>Q4. {{questionsAnswers.q4}}</p>
+          <p>Q5. {{questionsAnswers.q5}}</p>
         </div>
     <div class="row py-4" >
     </div>
   </section>
-  {{/each}}
 </section>
 
 
