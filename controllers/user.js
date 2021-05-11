@@ -12,7 +12,7 @@ var UserController = {
 			useraccount: { _id: req.session.user_id },
 		});
 		const questionsAnswers = await PersonalityQuestionnaire.findOne({userprofile: {_id: userProfile._id}})
-		console.log(userProfile._id)
+
 		res.render("user/index", {
 			title: "Profiles",
 			user: user,
@@ -125,12 +125,21 @@ var UserController = {
 		return res.status(200).redirect(`/user/${req.session.user_id}`);
 	},
 	BlockProfile: async function(req, res){
-		console.log('route working')
+		const userProfile = await UserProfile.findOne({
+			useraccount: { _id: req.session.user_id }
+		})
 
-
-
-
-
+		await UserProfile.findOneAndUpdate(
+			{ _id: userProfile._id }, 
+			{$pull: {matched: req.params.id, liked: req.params.id, likes_received: req.params.id}, $addToSet: {blocked: req.params.id} 
+			}
+		)
+		await UserProfile.findOneAndUpdate(
+			{ _id: req.params.id }, 
+			{$pull: {matched: userProfile._id, liked: userProfile._id, likes_received: userProfile._id }, $addToSet: {blocked_by: userProfile._id}  
+			}
+		)
+		
 		return res.status(200).redirect(`/user/${req.session.user_id}`);
 	}
 	
