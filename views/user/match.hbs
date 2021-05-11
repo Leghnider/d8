@@ -1,7 +1,9 @@
 {{#each userProfile}}
 
 {{#each this.matched}}
-    {{this.profileImages}}
+{{#each this.profileImages}}
+    <img src="{{this.url}}" alt="image" class="class img-fluid" width="200" height="200" ;>
+ {{/each}}
     {{this.username}}
 {{/each}}
 
