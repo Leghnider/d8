@@ -13,6 +13,7 @@ router.post('/liked/:id', UserController.LikeProfile);
 router.get('/match/:id', UserController.MatchProfile);
 
 router.post('/unmatch/:id', UserController.UnmatchProfile);
+router.post('/block/:id', UserController.BlockProfile);
 
 // router.post('/disliked/:id', UserController.DislikeProfile);
 

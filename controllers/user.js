@@ -125,7 +125,10 @@ var UserController = {
 			{$pull: {matched: userProfile._id , likes_received: userProfile._id } 
 			}
 		)
-
+		return res.status(200).redirect(`/user/${req.session.user_id}`);
+	},
+	BlockProfile: async function(req, res){
+		console.log('route working')
 		return res.status(200).redirect(`/user/${req.session.user_id}`);
 	}
 	
