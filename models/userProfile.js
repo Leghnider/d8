@@ -32,6 +32,18 @@ var UserProfileSchema = new mongoose.Schema({
   liked: [{ type: String }],
   likes_received: [{type: String}],
   matched: [{ type: String }]
+  //   liked: [{
+  //     type: mongoose.Schema.Types.ObjectId, 
+  //     ref: "UserProfile"
+  //   },],
+  // likes_received: [{
+  //   type: mongoose.Schema.Types.ObjectId, 
+  //   ref: "UserProfile"
+  // },],
+  // matched: [{
+  //   type: mongoose.Schema.Types.ObjectId, 
+  //   ref: "UserProfile"
+  // },]
 
 })
 

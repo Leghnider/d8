@@ -213,6 +213,7 @@ var HomeController = {
       res.redirect("/login");
     }
   },
+
 };
 
 module.exports = HomeController;

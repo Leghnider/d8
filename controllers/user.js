@@ -2,7 +2,6 @@ var UserProfile = require("../models/userProfile");
 var User = require("../models/userAccount");
 const PersonalityQuestionnaire = require('../models/personalityQuestionnaire')
 
-
 var UserController = {
 	UserProfile: async (req, res) => {
 		if (!req.session.user_id) {
@@ -90,6 +89,48 @@ var UserController = {
 		}
 		return res.status(200).redirect("/home");
 	},
+
+	MatchProfile: async (req, res) => {
+		// if (!req.session.user_id) {
+		// 	res.redirect("/login");
+		// } else {
+		const user = await User.findById(req.session.user_id);
+		const userProfile = await UserProfile.findOne({
+		useraccount: { _id: req.session.user_id }})
+		const matchProfile = await UserProfile.find({_id:  {$all: userProfile.matched}})
+
+		res.render("user/match", {
+			// title: "Profiles",
+			userProfile: userProfile,
+      // user: user,
+			matchProfile: matchProfile
+		}
+	);
+		},
+	UnmatchProfile: async function(req, res){
+		const userProfile = await UserProfile.findOne({
+			useraccount: { _id: req.session.user_id }
+		})
+
+		console.log(userProfile._id)
+		console.log(req.params.id)
+
+		await UserProfile.findOneAndUpdate(
+			{ _id: userProfile._id }, 
+			{$pull: {matched: req.params.id, liked: req.params.id} 
+			}
+		)
+		await UserProfile.findOneAndUpdate(
+			{ _id: req.params.id }, 
+			{$pull: {matched: userProfile._id , likes_received: userProfile._id } 
+			}
+		)
+
+		return res.status(200).redirect(`/user/${req.session.user_id}`);
+	}
+	
 };
+
+
 
 module.exports = UserController;
