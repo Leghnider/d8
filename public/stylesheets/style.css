@@ -1,8 +1,176 @@
 body {
-  padding: 50px;
   font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+  background-color: #fff;
 }
 
-a {
-  color: #00B7FF;
+#content {
+  min-height: calc(100vh - 40px);
+}
+
+#homepage-content section{
+  background-color: #e80d4a;
+}
+
+#homepage-navbar{
+  background-color: #e80d4a;
+  font-size: 1.25rem;
+}
+
+#homepage-navbar .nav-link{
+  color: #f6ce00;
+}
+
+#homepage-navbar .nav-link:hover{
+  color: white;
+}
+
+#homepage-navbar .btn-primary, .btn-primary:hover, .btn-primary:active, .btn-primary:visited {
+  background-color: #f6ce00 !important;
+  color: white;
+  border: #f6ce00;;
+}
+
+#navbar2{
+  background-color: #e80d4a;
+  font-size: 1.25rem;
+}
+
+#navbar2 .nav-link{
+  color: #f6ce00;
+}
+
+#navbar2 .nav-link:hover{
+  color: white;
+}
+
+#navbar2 .btn-primary, .btn-primary:hover, .btn-primary:active, .btn-primary:visited {
+  background-color: #f6ce00 !important;
+  color: white;
+  border: #f6ce00;;
+}
+
+#navbar2 #log-out-form .btn{
+  font-size: 18px;
+  color: #f6ce00;
+}
+
+#footer{
+  width: 100%;
+  position: fixed;
+  bottom: 0;
+  background-color: #e80d4a;
+  color: white;
+}
+
+#footer a{
+  color: #f6ce00;
+}
+
+.form-signin {
+  width: 100%;
+  max-width: 330px;
+  padding: 15px;
+  margin: auto;
+}
+
+.form-signin .form-floating:focus-within {
+  z-index: 2;
+}
+
+.form-signin input[type="email"] {
+  margin-bottom: -1px;
+  border-bottom-right-radius: 0;
+  border-bottom-left-radius: 0;
+}
+
+.form-signin input[type="password"] {
+  margin-bottom: 10px;
+  border-top-left-radius: 0;
+  border-top-right-radius: 0;
+}
+
+.form-signin .btn-primary, .btn-primary:hover, .btn-primary:active, .btn-primary:visited {
+  background-color: #f6ce00 !important;
+  color: white;
+  border: #f6ce00;;
+}
+
+.card-img-top {
+  width: 100%;
+  height: 20vw;
+  object-fit: cover;
+}
+
+.card-body a{ 
+  color: #e80d4a;
+}
+
+.card{
+  border: #dd7e99 0.1px solid;
+}
+
+.card-btn{
+  background-color: #e80d4a !important;
+  border: #e80d4a;
+}
+
+#dashboard-page h1{
+  color: #e80d4a;
+}
+
+#dashboard-page a{
+  color: #e80d4a;
+}
+
+#dashboard-page .card-body-bio{
+  text-overflow: ellipsis;
+  overflow: hidden;
+  display: -webkit-box;
+  -webkit-line-clamp: 4;
+  -webkit-box-orient: vertical;
+  margin-top: 2px;
+  margin-bottom: 5px;
+}
+
+.card-img-top-profile{
+  width: 100%;
+  height: 35vw;
+  object-fit: cover;
+}
+
+#users-profile-page .btn-a a{
+  color: white !important;
+}
+
+.card-title-title{
+  color: #e80d4a;
+}
+
+.form-register {
+  width: 100%;
+  max-width: 1000px;
+  padding: 15px;
+  margin: auto;
+}
+
+.form-register .form-floating:focus-within {
+  z-index: 2;
+}
+
+.form-register input[type="email"] {
+  margin-bottom: -1px;
+  border-bottom-right-radius: 0;
+  border-bottom-left-radius: 0;
+}
+
+.form-register input[type="password"] {
+  margin-bottom: 10px;
+  border-top-left-radius: 0;
+  border-top-right-radius: 0;
+}
+
+.form-register .btn-primary, .btn-primary:hover, .btn-primary:active, .btn-primary:visited {
+  background-color: #f6ce00 !important;
+  color: white;
+  border: #f6ce00;;
 }

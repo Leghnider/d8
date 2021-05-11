@@ -1,0 +1,19 @@
+<nav id="navbar2" class="py-2">
+  <ul class="nav">
+    <li class="nav-item">
+      <a class="nav-link active" aria-current="page" href="/">D8</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" aria-current="page" href="#">About</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" aria-current="page" href="/{{profile._id}}">My Profile</a>
+    </li>
+    <li class="nav-item ms-auto">
+      <form id="log-out-form" action="/logout" method="post">
+        <button class="btn" value="Log Out"> Log Out </button>
+      </form>
+      {{!-- <a class="nav-link" href="http:/logout">Logout</a> --}}
+    </li>
+  </ul>
+</nav>

@@ -9,6 +9,7 @@ var ProfilesController = {
     const profile = await UserProfile.findById(req.params.id)
     const user = await User.findById(profile.useraccount)
     const email = await user.email
+    console.log(profile)
     res.render('profiles/show', { profile: profile, email: email })
   }
 };

@@ -1,22 +1,52 @@
-<h1>Register form</h1>
+  {{> navbar}}
 
-<form id="register-form" action="/register" method="post">
-  <label for="firstName">First Name: </label>
-  <input id="firstName" type="text" name="firstName" value="" required>
+    <div class="content-container container">
+      <main class="form-register">
 
-  <label for="lastName">Last Name: </label>
-  <input id="lastName" type="text" name="lastName" value="" required>
+        <div class="row py-3">
+          <img class="mb-4 image-fluid mx-auto" style="max-width: 300px;" src="images/LogoMakr-5XstTZ.png" alt="" >
+        </div>
 
-  <label for="age">Age: </label>
-  <input type="number" id="age" name="age" min="18" max="100" required>
+        <div class="row py-3">
+          <form id="register-form" action="/register" method="post">
+            <h1 class="h4 mb-3 fw-normal">Create an account</h1>
+            
+            <div class="row">
+                <div class="form-floating">
+                <input id="email" type="email" name="email" class="form-control" id="floatingEmail" placeholder="name@example.com" required>
+                <label for="floatingEmail">Email address</label>
+              </div>
+              <div class="form-floating">
+                <input id="password" type="password" name="password" class="form-control" id="floatingPassword" placeholder="Password" required>
+                <label for="floatingPassword">Password</label>
+              </div>
+            </div>
 
-  <label for="email">Email :</label>
-  <input type="email" id="email" name="email" required>
+            <div class="row py-2">
+              <div class="form-floating col-md-4">
+                <input id="firstName" type="text" name="firstName" class="form-control" id="floatingName" placeholder="Jane" required>
+                <label for="floatingName">First Name</label>
+              </div>
+              <div class="form-floating col-md-4">
+                <input id="lastName" type="text" name="lastName" class="form-control" id="floatingLastName" placeholder="Doe" required>
+                <label for="floatingLastName">Last Name</label>
+              </div>
+              <div class="form-floating col-md-4">
+                <input id="age" type="number" name="age" min="18" max="100" class="form-control" id="floatingAge" placeholder="Doe" required>
+                <label for="floatingAge">Age</label>
+              </div>
+            </div>
 
-  <label for="password">Password: </label>
-  <input id="password" type="password" name="password" value="" required>
+            </div>
+            <button class="w-100 btn btn-lg btn-primary" type="submit">Create an Account</button>
+          </form>
+          <div class="row py-3">
+            <div class="col-12 align-items-centre">
+              <p style="max-width: 300px;" >Already have an account? 
+                <a class="sign-up-link" style="color:  #e80d4a;" href="http:/login">Login</a></p>
+            </div>
+          </div>
+          <div class="row py-4"></div>
+      </main>
 
-  <input type="submit" value="Submit">
-</form>
-
-<h3>If you already have an account please <a class="log-in-link" href="/login">Log In</a></h3>
+    </div>
