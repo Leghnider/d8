@@ -1,5 +1,4 @@
 var mongoose = require('mongoose');
-const Schema = mongoose.Schema;
 
 var UserProfileSchema = new mongoose.Schema({
   useraccount: [
