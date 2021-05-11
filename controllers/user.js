@@ -1,7 +1,5 @@
 var UserProfile = require("../models/userProfile");
 var User = require("../models/userAccount");
-// const UserAccount = require("../models/userAccount");
-// var UserMatch = require('../models/userMatch')
 
 var UserController = {
 	UserProfile: async (req, res) => {
@@ -42,7 +40,6 @@ var UserController = {
 			useraccount: { _id: req.session.user_id },
 		});
 		const userProfile = await UserProfile.findByIdAndUpdate(userInfo._id, {
-			// profilePicture: req.body.profilePic,
 			bio: req.body.bio,
 			username: req.body.username,
 			location: req.body.location,
@@ -88,24 +85,6 @@ var UserController = {
 		}
 		return res.status(200).redirect("/home");
 	},
-	//   DislikeProfile: async function (req, res) {
-	//     await UserProfile.findByIdAndUpdate(
-	//       { _id: req.params.id },
-	//       { $pull: { likes_received: req.session.user_id.toString() } }
-	//     );
-
-	//     const userInfo = await UserProfile.findOne({
-	//       useraccount: { _id: req.session.user_id },
-	//     });
-	//     const liked = await UserProfile.findByIdAndUpdate(userInfo, {
-	//       $pull: { liked: req.params.id.toString() },
-	//     });
-	//     console.log(req.session.user_id);
-	//     console.log(liked);
-	//     // if (saveErr) {
-	//     // 	throw saveErr;}
-	//     return res.status(200).redirect("/home");
-	//   },
 };
 
 module.exports = UserController;
