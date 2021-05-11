@@ -10,7 +10,9 @@ router.get('/:id', UserController.UserProfile);
 router.get('/:id/edit', UserController.EditProfile);
 router.post('/:id/edit', UserController.UpdateProfile);
 router.post('/liked/:id', UserController.LikeProfile);
-router.get('/match/:id', UserController.MatchProfile)
+router.get('/match/:id', UserController.MatchProfile);
+
+router.post('/unmatch/:id', UserController.UnmatchProfile);
 
 // router.post('/disliked/:id', UserController.DislikeProfile);
 
