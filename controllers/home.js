@@ -122,27 +122,29 @@ var HomeController = {
 		});
     var searchResults = null; 
 
+    var likedBlockedBlockedBy = user_profile_details.liked.concat(user_profile_details.blocked_by, user_profile_details.blocked)
+
     if (user_profile_details.gender === "Male" && user_profile_details.interested_in[0] === "Men"){
       searchResults = await UserProfile.find({ 
-        _id: { $ne: user_profile_details._id, $nin: user_profile_details.liked },
+        _id: { $ne: user_profile_details._id, $nin: likedBlockedBlockedBy},
         gender: 'Male', 
         interested_in: 'Men' })
     } 
     else if (user_profile_details.gender === "Male" && user_profile_details.interested_in[0] === "Women"){
       searchResults = await UserProfile.find({ 
-        _id: { $nin: user_profile_details.liked },
+        _id: { $nin: user_profile_details.liked, $nin: likedBlockedBlockedBy },
         gender: 'Female', 
         interested_in: 'Men' })
     }
     else if (user_profile_details.gender === "Female" && user_profile_details.interested_in[0] === "Women"){
       searchResults = await UserProfile.find({ 
-        _id: { $ne: user_profile_details._id, $nin: user_profile_details.liked },
+        _id: { $ne: user_profile_details._id, $nin: likedBlockedBlockedBy },
         gender: 'Female', 
         interested_in: 'Women' })
     } 
     else if (user_profile_details.gender === "Female" && user_profile_details.interested_in[0] === "Men"){
       searchResults = await UserProfile.find({
-        _id: { $nin: user_profile_details.liked },
+        _id: { $nin: user_profile_details.liked, $nin: likedBlockedBlockedBy },
         gender: 'Male', 
         interested_in: 'Women'})
     }
@@ -172,9 +174,11 @@ var HomeController = {
 		});
     var searchResults = null; 
 
+    var likedBlockedBlockedBy = user_profile_details.liked.concat(user_profile_details.blocked_by, user_profile_details.blocked)
+
     if (user_profile_details.gender === "Male" && user_profile_details.interested_in[0] === "Men"){
       searchResults = await UserProfile.find({
-        _id: { $ne: user_profile_details._id, $nin: user_profile_details.liked },
+        _id: { $ne: user_profile_details._id, $nin: likedBlockedBlockedBy },
         gender: 'Male',
         interested_in: 'Men', 
         age: {$gte: minage, $lte: maxage}, 
@@ -182,7 +186,7 @@ var HomeController = {
     } 
     else if (user_profile_details.gender === "Male" && user_profile_details.interested_in[0] === "Women"){
       searchResults = await UserProfile.find({
-        _id: { $nin: user_profile_details.liked },
+        _id: { $nin: likedBlockedBlockedBy},
         gender: 'Female',
         interested_in: 'Men', 
         age: {$gte: minage, $lte: maxage}, 
@@ -190,7 +194,7 @@ var HomeController = {
     }
     else if (user_profile_details.gender === "Female" && user_profile_details.interested_in[0] === "Women"){
       searchResults = await UserProfile.find({
-        _id: { $ne: user_profile_details._id, $nin: user_profile_details.liked },
+        _id: { $ne: user_profile_details._id, $nin: likedBlockedBlockedBy},
         gender: 'Female', 
         interested_in: 'Women', 
         age: {$gte: minage, $lte: maxage}, 
@@ -198,7 +202,7 @@ var HomeController = {
     } 
     else if (user_profile_details.gender === "Female" && user_profile_details.interested_in[0] === "Men"){
       searchResults = await UserProfile.find({
-        _id: { $nin: user_profile_details.liked },
+        _id: { $nin: likedBlockedBlockedBy},
         gender: 'Male', 
         interested_in: 'Women', 
         age: {$gte: minage, $lte: maxage}, 
