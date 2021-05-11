@@ -1,25 +1,45 @@
 {{> navbar2}}
+<div class="content-container container">
+  <main class="form-register">
+    <div class="row py-3">
+      <form id="edit-profile-form" action="/user/{{user._id}}/edit" method="POST">
+      <h1 class="h4 mb-3 fw-normal">Edit your profile</h1>
+      <p>Your profile will be visible to other users</p>
 
-{{title}}
-<form id="edit-profile-form" action="/user/{{user._id}}/edit" method="POST">
- <input type="hidden" name="_method" value="put">
+      <div class="row">
+        <div class="form-floating col-md-4 py-1">
+          <input id="username" type="text" name="username" class="form-control" id="floatingUsername" value="{{userInfo.username}}" required>
+          <label for="floatingUsername">Username</label>
+        </div>
+        <div class="form-floating col-md-4 py-1">
+          {{!-- Does not preselect the last location, selected didn't work --}}
+          <select id="location" type="text" name="location" class="form-control" id="floatingLocation" required>
+            <option value="North London"> North London </option>
+            <option value="West London"> West London </option>
+            <option value="South London"> South London </option>
+            <option value="East London"> East London </option>  
+          </select>
+          <label for="floatingLocation">Location</label>
+        </div>
+        <div class="form-floating col-md-4 py-1">
+          <input id="age" type="number" name="age" min="18" max="100" class="form-control" id="floatingAge" value="{{userInfo.age}}" required>
+          <label for="floatingAge">Age</label>
+        </div>
+      </div>
 
-{{!-- <input class="form-control" type="file" id="profilePic" name="profilePic"> --}}
-  <label for="bio">Bio: </label>
-  <input id="bio" type="text" name="bio" value="{{userInfo.bio}}" required>
-  
-  <label for="username">Username: </label>
-  <input id="username" type="text" name="username" value="{{userInfo.username}}" required>
+      <div class="row">
+        <div class="col-8 mx-auto py-1 mb-4">
+          <label for="bio">Bio</label>
+          <textarea class="form-control" id="bio" type="text" name="bio" rows="7">{{userInfo.bio}}</textarea>
+        </div>
+      </div>
+      
+      <button class="w-100 btn btn-lg btn-primary" type="submit">Edit profile</button>
 
-  <label for="location">location: </label>
-  <input type="text" id="location" name="location" value="{{userInfo.location}}" required>
-
-
-  <label for="age">Age: </label>
-  <input type="number" id="age" name="age" min="18" max="100" value="{{userInfo.age}}" required>
-  <input type="submit" value="Edit Bio">
-</form>
-
-<div class="backtoprofile">
-  <a href="/user/{{user._id}}">Back to Profile</a>
+      </form>
+    </div>
+    <div class="row py-1 backtoprofile">
+      <a href="/user/{{user._id}}">Back to your profile</a>
+    </div>
+  </main>
 </div>
