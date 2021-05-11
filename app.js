@@ -8,7 +8,6 @@ var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 const session = require('express-session');
-const _ = require("lodash");
 
 
 var homeRouter = require('./routes/home');
@@ -24,10 +23,6 @@ hbs.registerPartials(__dirname + '/views/partials', function (err) {});
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'hbs');
-
-hbs.registerHelper('countlikes_received', (arrayOfIds) => {
-  return _.uniq(arrayOfIds).length;
-})
 
 //sessions
 app.use(
