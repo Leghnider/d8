@@ -14,10 +14,10 @@
         <div class="form-floating col-md-4 py-1">
           {{!-- Does not preselect the last location, selected didn't work --}}
           <select id="location" type="text" name="location" class="form-control" id="floatingLocation" required>
-            <option value="North London"> North London </option>
-            <option value="West London"> West London </option>
-            <option value="South London"> South London </option>
-            <option value="East London"> East London </option>  
+            <option {{#if_eq "North London" userInfo.location }} selected="selected" {{/if_eq}} value="North London"> North London </option>
+            <option {{#if_eq "West London" userInfo.location }} selected="selected" {{/if_eq}} value="West London"> West London </option>
+            <option {{#if_eq "South London" userInfo.location }} selected="selected" {{/if_eq}} value="South London"> South London </option>
+            <option {{#if_eq "East London" userInfo.location }} selected="selected" {{/if_eq}} value="East London"> East London </option>  
           </select>
           <label for="floatingLocation">Location</label>
         </div>
