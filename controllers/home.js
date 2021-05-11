@@ -186,23 +186,6 @@ var HomeController = {
     }
   },
 
-  MatchProfile: async (req, res) => {
-		if (!req.session.user_id) {
-			res.redirect("/login");
-		} else {
-	const user = await User.findById(req.session.user_id);
-		const userProfile = await UserProfile.find({
-			useraccount: { _id: req.session.user_id },
-		})
-		//const matchProfile = await userProfile.find({_id: userProfile.matched}).
-		res.render("user/match", {
-			title: "Profiles",
-			userProfile: userProfile,
-      user: user
-		});
-	}
-	},
-
 };
 
 module.exports = HomeController;

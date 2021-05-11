@@ -106,6 +106,24 @@ var UserController = {
 	//     // 	throw saveErr;}
 	//     return res.status(200).redirect("/home");
 	//   },
+
+	MatchProfile: async (req, res) => {
+		if (!req.session.user_id) {
+			res.redirect("/login");
+		} else {
+	const user = await User.findById(req.session.user_id);
+		const userProfile = await UserProfile.find({
+			useraccount: { _id: req.session.user_id },
+		}).populate("matched")
+		const matchProfile = await userProfile.find({_id:  {$all: UserProfile.matched}})
+		res.render("user/match", {
+			title: "Profiles",
+			userProfile: userProfile,
+      user: user,
+			matchProfile: matchProfile
+		});
+	}
+	}
 	
  
 };
