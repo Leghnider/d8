@@ -28,9 +28,12 @@ var UserProfileSchema = new mongoose.Schema({
   },
   interested_in:[{
     type: String,
-  }]
+  }],
+  liked: [{ type: String }],
+  likes_received: [{type: String}],
+  matched: [{ type: String }]
+
 })
 
-
 var UserProfile = mongoose.model('UserProfile', UserProfileSchema);
-module.exports = UserProfile; 
+module.exports = UserProfile 

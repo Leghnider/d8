@@ -19,6 +19,7 @@ var hbs = require('hbs');
 
 hbs.registerPartials(__dirname + '/views/partials', function (err) {});
 
+
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'hbs');
@@ -27,8 +28,8 @@ app.set('view engine', 'hbs');
 app.use(
 	session({
 		secret: "keyboard cat",
-	}),
-  );
+}),
+);
 
 app.use(logger('dev'));
 app.use(express.json());
