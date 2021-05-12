@@ -1,13 +1,13 @@
 <h1>Your conversation with {{match.username}} </h1>
 <div id="future"></div>
-<div class="chat-display">
-  {{#each message}}
-  <span> {{message.timestamp}} - {{message.body}} </span>
+<div id="chat-display">
+  {{#each message_history}}
+  <span> {{this.chat_history}} - {{message.body}} </span>
   {{/each}}
 </div>
 <form id="form" id="chat_form" action="/user/{{match.id}}/chat" method="post">
   <input id="chat_input" name="message" type="text">
-  <input type="submit" value="Send">
+  <input type="submit" id="submit-button" value="Send">
 </form>
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
@@ -16,7 +16,8 @@
 <script>
   var socket = io.connect('http://localhost:3000');
   socket.on('connect', function (data) {
-    socket.emit('join', 'Hello World from client');
+    socket.emit('roomId', {{roomId}});
+    console.log('i AM IN THE ROOM')
   });
   socket.on('broad', function (data) {
     $('#future').append(data + "<br/>");
@@ -30,21 +31,35 @@
     newMessage.innerText = newMessage;
 
     // Clear the input
-    const textContent = document.getElementById("current-message")
+    const textContent = document.getElementById("chat-input")
 
     textContent.innerText = "";
 
   }
+
+  const onMessageSubmit = () => {
+     const textContent = document.getElementById("chat-input")
+
+     try {
+			 // "In my room, send a message using the key "sendMessage"
+	     socket.emit("sendMessageEvent", JSON.stringify({ roomId: "{{roomId}}", body: textContent }))
+     }
+     catch(err) {
+       console.log(err)
+     }
+  }
+
+
   const onPageLoad = () => {
-    const submitButton = document.getElementById("submit")
+    const submitButton = document.getElementById("submit-button")
     socket.on('connect', function () {
       // Connected, let's sign-up for to receive messages for this room
-      socket.emit('roomId', {{roomId}});
+      socket.emit('roomId', "{{roomId}}");
     });
 
-    socket.on('message', function (data) {
-      console.log('Incoming message:', data);
-    });
+//socket.on('message', function (data) { --}}
+    //  console.log('Incoming message:', data);
+   // });
 
     socket.on("sendMessageEvent", addMessageToPage)
 
@@ -54,10 +69,5 @@
   window.addEventListener('DOMContentLoaded', onPageLoad);
 
 
-  $('form').submit(function (e) {
-    e.preventDefault();
-    var message = $('#chat_input').val();
-    socket.emit('messages', message);
-  });
 
 </script>

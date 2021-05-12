@@ -144,8 +144,9 @@ var UserController = {
 
     console.log(match.username);
 
-    const roomId = `room-${userProfile._id}-${match._id}`;
-
+    // const roomId = `room-${userProfile._id}-${match._id}`;
+    const roomId = [userProfile._id, match._id]
+    
     var socket = io();
 
     socket.on("create", function (roomId) {
@@ -177,8 +178,10 @@ var UserController = {
     const match = await UserProfile.findById({
       _id: req.params.id,
     });
+    const roomId = [userProfile._id, match._id]
 
-    const roomId = `room-${userProfile._id}-${match._id}`;
+    // const roomId = `room-${userProfile._id}-${match._id}`;
+
 
     var socket = io();
 

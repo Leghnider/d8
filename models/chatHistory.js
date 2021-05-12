@@ -2,9 +2,9 @@ var mongoose = require("mongoose");
 
 var ChatHistorySchema = new mongoose.Schema(
   {
-    conversation_id: {
+    conversation_id:[ {
       type: String,
-    },
+    }],
     chat_history: [
       {
         type: String,
