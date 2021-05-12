@@ -16,6 +16,8 @@ router.get('/:id/delete', UserController.DeleteProfile);
 router.post('/:id/delete', UserController.RemoveProfile);
 
 router.post('/:id/addPhoto', upload.array("image"), UserController.AddPhoto);
+router.post('/:id/deletePhotos', UserController.DeletePhoto);
+
 
 router.post('/liked/:id', UserController.LikeProfile);
 router.get('/match/:id', UserController.MatchProfile);

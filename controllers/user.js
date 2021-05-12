@@ -217,6 +217,13 @@ var UserController = {
 		await userProfile.save()
 
 		res.redirect(`/user/${req.session.user_id}`);
+	},
+	DeletePhoto: async function (req, res){
+		if (!req.session.user_id) {
+			res.redirect("/login");
+		}
+		console.log(req.body)
+		res.redirect(`/user/${req.session.user_id}`);
 	}
 };
 
