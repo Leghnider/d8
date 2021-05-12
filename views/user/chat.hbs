@@ -1,7 +1,59 @@
-        <form id="form" id="chat_form">
-            <input id="chat_input" type="text">
-            <input type="submit" value="Send">
-        </form>
+<body>
+    <div>
+        <h3> Your conversation with {{user_name}} </h3>
+        <div class="chat-display">
+            {{#each message}}
+            <span>{{message.timestamp}}-{{message.body}}</span>
+            {{/each}}
+        </div>
+        <input id="current-message" />
+        <button id="submit-button"></button>
+    </div>
+    <script>
+        var socket = io();
 
-<script src="/jquery/dist/jquery.js"></script>
-<script src="/socket.io/socket.io.js"></script>
+        const addMessageToPage = (msg) => {
+            // Append a local client side copy of the message ("Optimistically fetching")
+            const submitButton = document.getElementById("chat-display")
+            const newMessage = document.createElement("span")
+            const content = `${Date.now()} - ${msg}`
+
+            newMessage.innerText = newMessage;
+
+            // Clear the input
+            const textContent = document.getElementById("current-message")
+
+            textContent.innerText = "";
+
+        }
+
+        const onMessageSubmit = () => {
+            const textContent = document.getElementById("current-message")
+
+            try {
+                // "In my room, send a message using the key "sendMessage"
+                socket.emit("sendMessageEvent", JSON.stringify({ roomId: "{{roomId}}", body: textContent.innerText, timestamp: Date.now() }))
+            }
+            catch (err) {
+                console.log(err)
+            }
+        }
+
+        const onPageLoad = () => {
+            const submitButton = document.getElementById("submit-button")
+
+            socket.connect("{{roomId}}")
+
+            socket.on("sendMessageEvent", addMessageToPage)
+
+            submitButton.addEventListener("click", onMessageSubmit)
+        }
+
+        window.addEventListener("DOMContentLoaded", onPageLoad)
+    </script>
+    <script src="/jquery/dist/jquery.js"></script>
+    <script src="/socket.io/socket.io.js"></script>
+
+</body>
+
+</html>
