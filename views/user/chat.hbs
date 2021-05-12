@@ -1,58 +1,30 @@
- 
-    <script src="/socket.io/socket.io.js"></script>
-   <body>
-      <div> 
-  <h3> Your conversation with {{user_name}} </h3>
-  <div class="chat-display">
-    {{#each message}}
-      <span>{{message.timestamp}}-{{message.body}}</span>
-    {{/each}}
-  </div>
-  <input id="current-message"/>
-  <button id="submit-button"></button>
-</div>
-  <script> 
-  var socket = io();
+<h1>Your conversation with {{this.user}} </h1>
+<div id="future"></div>
+<form id="form" id="chat_form">
+  <input id="chat_input" type="text">
+  <input type="submit" value="Send">
+</form>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 
-  const addMessageToPage = (msg) => {
-    // Append a local client side copy of the message ("Optimistically fetching")
-    const submitButton = document.getElementById("chat-display")
-    const newMessage = document.createElement("span")
-    const content = `${Date.now()} - ${msg}`
+<script src="/socket.io/socket.io.js"></script>
 
-    newMessage.innerText = newMessage;
 
-    // Clear the input
-    const textContent = document.getElementById("current-message")
+<script src="/jquery/dist/jquery.js"></script>
+<script src="/socket.io/socket.io.js"></script>
 
-    textContent.innerText = "";
+<script>
+  var socket = io.connect('http://localhost:3000');
+  socket.on('connect', function (data) {
+    socket.emit('join', 'Hello World from client');
+  });
+  socket.on('broad', function (data) {
+    $('#future').append(data + "<br/>");
+  });
 
-  }
+  $('form').submit(function (e) {
+    e.preventDefault();
+    var message = $('#chat_input').val();
+    socket.emit('messages', message);
+  });
 
-  const onMessageSubmit = () => {
-     const textContent = document.getElementById("current-message")
-
-     try {
-			 // "In my room, send a message using the key "sendMessage"
-	     socket.emit("sendMessageEvent", JSON.stringify({ roomId: "{{roomId}}", body: textContent.innerText, timestamp: Date.now() }))
-     }
-     catch(err) {
-       console.log(err)
-     }
-  }
-
-  const onPageLoad = () => {
-    const submitButton = document.getElementById("submit-button")
-
-    socket.connect("{{roomId}}")
-		
-		socket.on("sendMessageEvent", addMessageToPage)
-	
-    submitButton.addEventListener("click", onMessageSubmit)
-  }
-
-  window.addEventListener("DOMContentLoaded", onPageLoad)
 </script>
-   
-</body>
-</html>
