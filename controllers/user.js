@@ -198,8 +198,25 @@ var UserController = {
 		req.session.user_id = null;
 		if (req.session.user_id === null){
       req.flash('err', 'You have sucessfully deleted your account');
-      res.status(200).redirect('/register');
+      res.redirect('/register');
     }
+	},
+	AddPhoto: async function (req, res){
+		if (!req.session.user_id) {
+			res.redirect("/login");
+		}
+		const userProfile = await UserProfile.findOne({
+			useraccount: { _id: req.session.user_id },
+		});
+		const imgs = req.files.map((f) => ({
+      url: f.path,
+      filename: f.filename,
+    }));
+
+		userProfile.images.push(...imgs)
+		await userProfile.save()
+
+		res.redirect(`/user/${req.session.user_id}`);
 	}
 };
 

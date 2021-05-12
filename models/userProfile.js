@@ -11,6 +11,10 @@ var UserProfileSchema = new mongoose.Schema({
     url: String,
     filename: String
   }],
+  images: [{
+    url: String,
+    filename: String
+  }],
   bio:{
     type: String
   },
