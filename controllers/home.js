@@ -62,7 +62,6 @@ var HomeController = {
 
 
     var checkUsername = await UserProfile.findOne({ username });
-    console.log(checkUsername)
 
     if (checkUsername) {
       req.flash('err', 'This username has already been taken. Please select a different username.')
