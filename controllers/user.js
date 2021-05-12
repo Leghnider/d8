@@ -92,24 +92,6 @@ var UserController = {
     }
     return res.status(200).redirect("/home");
   },
-  //   DislikeProfile: async function (req, res) {
-  //     await UserProfile.findByIdAndUpdate(
-  //       { _id: req.params.id },
-  //       { $pull: { likes_received: req.session.user_id.toString() } }
-  //     );
-
-  //     const userInfo = await UserProfile.findOne({
-  //       useraccount: { _id: req.session.user_id },
-  //     });
-  //     const liked = await UserProfile.findByIdAndUpdate(userInfo, {
-  //       $pull: { liked: req.params.id.toString() },
-  //     });
-  //     console.log(req.session.user_id);
-  //     console.log(liked);
-  //     // if (saveErr) {
-  //     // 	throw saveErr;}
-  //     return res.status(200).redirect("/home");
-  //   },
 
   MatchProfile: async (req, res) => {
     if (!req.session.user_id) {
@@ -142,26 +124,27 @@ var UserController = {
       _id: req.params.id,
     });
 
-    console.log(match.username);
 
-    const roomId = `room-${userProfile._id}-${match._id}`;
+    const roomId =  [userProfile._id, match._id]
 
-    var socket = io();
-
-    socket.on("create", function (roomId) {
-      socket.join(roomId);
-      console.log("Room joined!")
+    const message_history = await ChatHistory.findOne({
+      conversation_id: {$all: [userProfile._id, match._id]}
     });
-
-    const message_history = ChatHistory.findById({
-      conversation_id: roomId,
-    });
-
+    
+    if (!message_history) {
+      ChatHistory.create({
+        conversation_id: roomId,
+        chat_history: [req.body.message],
+        userprofile: userProfile._id
+      });
+    }
+  
     res.render("user/chat", {
       userProfile: userProfile,
       roomId: roomId,
       match: match,
-      chat_history: message_history
+      message_history: message_history
+      
     });
   },
 
@@ -178,28 +161,19 @@ var UserController = {
       _id: req.params.id,
     });
 
-    const roomId = `room-${userProfile._id}-${match._id}`;
-
-    var socket = io();
-
     const message_history = await ChatHistory.findOne({
-      conversation_id: roomId,
+      conversation_id: {$all: [userProfile._id, match._id]}
     });
     
-    socket.join
+
     if (message_history) {
       message_history.chat_history.push(req.body.message)
       var history = await message_history.save();
       console.log(history)
-    } else {
-      ChatHistory.create({
-        conversation_id: roomId,
-        chat_history: [req.body.message]
-      });
     }
-
-    socket.to(roomId).emit({ message: req.body.message })
-  },
+    
+  res.redirect('back')
+  }
 };
 
 module.exports = UserController;
