@@ -1,5 +1,8 @@
 var express = require('express');
 var router = express.Router();
+const multer = require("multer");
+const { storage } = require("../cloudinary");
+const upload = multer({ storage });
 
 // there will need to be a controllers file in the controllers 
 
@@ -8,7 +11,7 @@ var UserController = require('../controllers/user');
 
 router.get('/:id', UserController.UserProfile);
 router.get('/:id/edit', UserController.EditProfile);
-router.post('/:id/edit', UserController.UpdateProfile);
+router.post('/:id/edit', upload.array("profileImage"), UserController.UpdateProfile);
 router.get('/:id/delete', UserController.DeleteProfile);
 router.post('/:id/delete', UserController.RemoveProfile);
 

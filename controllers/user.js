@@ -49,6 +49,13 @@ var UserController = {
 			location: req.body.location,
 			age: req.body.age,
 		});
+
+		userProfile.profileImages = req.files.map((f) => ({
+      url: f.path,
+      filename: f.filename,
+    }));
+		await userProfile.save()
+
 		res.status(201).redirect(`/user/${req.session.user_id}`);
 	},
 
