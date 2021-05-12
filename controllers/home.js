@@ -252,10 +252,71 @@ var HomeController = {
     res.render('profiles/filtered', {title:"Filtered Profiles", searchResults: searchResults})
   },
   RandomLike: async function (req, res) {
-    
+    // this is from the dashboard - need to get the array of search results
+    const user = await User.findById(req.session.user_id);
+
+    var user_profile_details = await UserProfile.findOne({
+			useraccount: { _id: req.session.user_id },
+		});
+    var searchResults = null; 
+
+    var likedBlockedBlockedBy = user_profile_details.liked.concat(user_profile_details.blocked_by, user_profile_details.blocked)
+
+    if (user_profile_details.gender === "Male" && user_profile_details.interested_in[0] === "Men"){
+      searchResults = await UserProfile.find({ 
+        _id: { $ne: user_profile_details._id, $nin: likedBlockedBlockedBy},
+        gender: 'Male', 
+        interested_in: 'Men' })
+    } 
+    else if (user_profile_details.gender === "Male" && user_profile_details.interested_in[0] === "Women"){
+      searchResults = await UserProfile.find({ 
+        _id: { $nin: user_profile_details.liked, $nin: likedBlockedBlockedBy },
+        gender: 'Female', 
+        interested_in: 'Men' })
+    }
+    else if (user_profile_details.gender === "Female" && user_profile_details.interested_in[0] === "Women"){
+      searchResults = await UserProfile.find({ 
+        _id: { $ne: user_profile_details._id, $nin: likedBlockedBlockedBy },
+        gender: 'Female', 
+        interested_in: 'Women' })
+    } 
+    else if (user_profile_details.gender === "Female" && user_profile_details.interested_in[0] === "Men"){
+      searchResults = await UserProfile.find({
+        _id: { $nin: user_profile_details.liked, $nin: likedBlockedBlockedBy },
+        gender: 'Male', 
+        interested_in: 'Women'})
+    }
+    var randomLike = searchResults[Math.floor(Math.random()* searchResults.length)];
 
 
+    await UserProfile.findByIdAndUpdate(
+      randomLike._id,
+      { $addToSet: { likes_received: user_profile_details._id.toString() } }
+    );
+
+    await UserProfile.findByIdAndUpdate(
+      user_profile_details._id,
+      { $addToSet: { liked: randomLike._id.toString() } }
+    );
     
+    var isMatched;
+    var likeArray = randomLike.liked;
+
+    for (var i = 0; i < likeArray.length; i++) {
+			if (likeArray.includes(user_profile_details._id)){
+				isMatched = true;
+			}
+		}
+
+    if (isMatched === true) {
+			await UserProfile.findByIdAndUpdate(randomLike._id, {
+				$push: {matched: user_profile_details._id}
+			})
+			await UserProfile.findByIdAndUpdate(user_profile_details._id, {
+				$push: {matched: randomLike._id}
+			})
+		};
+
     res.redirect("/home");
   },
   Logout: function (req, res) {
