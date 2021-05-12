@@ -1,7 +1,6 @@
 var UserProfile = require("../models/userProfile");
 var User = require("../models/userAccount");
-// const UserAccount = require("../models/userAccount");
-// var UserMatch = require('../models/userMatch')
+const PersonalityQuestionnaire = require('../models/personalityQuestionnaire')
 
 var UserController = {
 	UserProfile: async (req, res) => {
@@ -9,13 +8,16 @@ var UserController = {
 			res.redirect("/login");
 		}
 		const user = await User.findById(req.session.user_id);
-		const userProfile = await UserProfile.find({
+		const userProfile = await UserProfile.findOne({
 			useraccount: { _id: req.session.user_id },
 		});
+		const questionsAnswers = await PersonalityQuestionnaire.findOne({userprofile: {_id: userProfile._id}})
+
 		res.render("user/index", {
 			title: "Profiles",
 			user: user,
 			userProfile: userProfile,
+			questionsAnswers: questionsAnswers,
 		});
 	},
 	EditProfile: async (req, res) => {
@@ -42,7 +44,6 @@ var UserController = {
 			useraccount: { _id: req.session.user_id },
 		});
 		const userProfile = await UserProfile.findByIdAndUpdate(userInfo._id, {
-			// profilePicture: req.body.profilePic,
 			bio: req.body.bio,
 			username: req.body.username,
 			location: req.body.location,
@@ -88,24 +89,62 @@ var UserController = {
 		}
 		return res.status(200).redirect("/home");
 	},
-	//   DislikeProfile: async function (req, res) {
-	//     await UserProfile.findByIdAndUpdate(
-	//       { _id: req.params.id },
-	//       { $pull: { likes_received: req.session.user_id.toString() } }
-	//     );
 
-	//     const userInfo = await UserProfile.findOne({
-	//       useraccount: { _id: req.session.user_id },
-	//     });
-	//     const liked = await UserProfile.findByIdAndUpdate(userInfo, {
-	//       $pull: { liked: req.params.id.toString() },
-	//     });
-	//     console.log(req.session.user_id);
-	//     console.log(liked);
-	//     // if (saveErr) {
-	//     // 	throw saveErr;}
-	//     return res.status(200).redirect("/home");
-	//   },
+	MatchProfile: async (req, res) => {
+		// if (!req.session.user_id) {
+		// 	res.redirect("/login");
+		// } else {
+		const user = await User.findById(req.session.user_id);
+		const userProfile = await UserProfile.findOne({
+		useraccount: { _id: req.session.user_id }})
+		const matchProfile = await UserProfile.find({_id:  {$all: userProfile.matched}})
+
+		res.render("user/match", {
+			// title: "Profiles",
+			userProfile: userProfile,
+      // user: user,
+			matchProfile: matchProfile
+		}
+	);
+		},
+	UnmatchProfile: async function(req, res){
+		const userProfile = await UserProfile.findOne({
+			useraccount: { _id: req.session.user_id }
+		})
+
+		await UserProfile.findOneAndUpdate(
+			{ _id: userProfile._id }, 
+			{$pull: {matched: req.params.id, liked: req.params.id} 
+			}
+		)
+		await UserProfile.findOneAndUpdate(
+			{ _id: req.params.id }, 
+			{$pull: {matched: userProfile._id , likes_received: userProfile._id } 
+			}
+		)
+		return res.status(200).redirect(`/user/${req.session.user_id}`);
+	},
+	BlockProfile: async function(req, res){
+		const userProfile = await UserProfile.findOne({
+			useraccount: { _id: req.session.user_id }
+		})
+
+		await UserProfile.findOneAndUpdate(
+			{ _id: userProfile._id }, 
+			{$pull: {matched: req.params.id, liked: req.params.id, likes_received: req.params.id}, $addToSet: {blocked: req.params.id} 
+			}
+		)
+		await UserProfile.findOneAndUpdate(
+			{ _id: req.params.id }, 
+			{$pull: {matched: userProfile._id, liked: userProfile._id, likes_received: userProfile._id }, $addToSet: {blocked_by: userProfile._id}  
+			}
+		)
+		
+		return res.status(200).redirect(`/user/${req.session.user_id}`);
+	}
+	
 };
+
+
 
 module.exports = UserController;

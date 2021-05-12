@@ -1,33 +1,44 @@
-<form id="personality-questionnaire-form" action="/register-personality-questionnaire" method="post">
-    <h2> We'd like to get to know you a little bit more... </h2>
+{{> navbar3}}
+<div class="content-container container">
+    <main class="form-register">
+        <div class="row py-3">
+            <img class="mb-4 image-fluid mx-auto" style="max-width: 300px;" src="images/LogoMakr-5XstTZ.png" alt="" >
+        </div>
+        <div class="row py-3">
+            <form id="personality-questionnaire-form" action="/register-personality-questionnaire" method="post">
+                <h1 class="h4 mb-3 fw-normal">We'd like to get to know you a little bit more... </h1>
+                <h5> Here are some questions that we think will help other D8rs get an idea of who you are </h5>
 
-    <h4> Here are some questions that we think will help other D8rs get an idea of who you are </h4>
+                <div class="row py-1">
+                    <label for="q1"><p> What is your go-to Karaoke song?</p></label>
+                    <input id="q1" name="q1" type="text" required>
+                </div>
 
-    <label for="q1">
-        <p> What is your go-to Karaoke song? </p>
-        <input id="q1" name="q1" type="text" required>
-    </label>
+                <div class="row py-1">
+                    <label for="q2"><p> If you could live anywhere in the world, where would it be and why? </p></label>
+                    <input id="q2" name="q2" type="text" required >
+                </div>
 
-    <label for="q2">
-        <p> If you could live anywhere in the world, where would it be and why? </p>
-        <input id="q2" name="q2" type="text" required >
-    </label>
+                <div class="row py-1">
+                    <label for="q3"><p> Have you ever had a nickname? What is it?</p></label>
+                    <input id="q3" name="q3" type="text" required >
+                </div>
 
-    <label for="q3">
-        <p> Have you ever had a nickname? What is it? </p>
-        <input id="q3" name="q3" type="text" required >
-    </label>
+                <div class="row py-1">
+                     <label for="q4"><p> 4. What's the craziest thing you’ve done in the name of love? (Doesn't necessarily have to be love for a particular person) </p></label>
+                     <input id="q4" name="q4" type="text" required >
+                </div>
 
-    <label for="q4">
-        <p> 4. What's the craziest thing you’ve done in the name of love? (Doesn't necessarily have to be love for a particular person) </p>
-        <input id="q4" name="q4" type="text" required >
-    </label>
-
-    <label for="q5">
-        <p> 5. What would you do if you won the lottery? </p>
-        <input id="q5" name="q5" type="text" required >
-    </label>
-
-    <input type="submit" value="Submit">
-
-</form>
+                <div class="row py-1">
+                    <label for="q5"><p> 5. What would you do if you won the lottery? </p></label>
+                    <input id="q5" name="q5" type="text" required >
+                </div>
+                
+                <div class="row py-1">
+                    <button class="w-100 btn btn-lg btn-primary" type="submit">Submit Answers</button>
+                </div>
+            </form>
+        </div>
+    
+    </main>
+</div>

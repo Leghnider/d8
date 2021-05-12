@@ -174,3 +174,8 @@ body {
   color: white;
   border: #f6ce00;;
 }
+
+.backtoprofile a{
+  color: #e80d4a;
+  text-decoration: none;
+}

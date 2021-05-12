@@ -1,0 +1,31 @@
+Matches page
+
+{{userProfile.username}} - Your Matches
+{{!-- {{#each userProfile}}
+
+{{this.username}}
+
+
+{{/each}} --}}
+
+{{#each matchProfile}}
+<div>
+  {{this.username}}
+{{!-- Create a unmatch button --}}
+ <form action='/user/unmatch/{{this.id}}' method='post'>
+   <button style="background-color:white; border: white"type="submit"><i class= "fas fa-times" style="color:rgb(252, 0, 0)"></i></button>
+  </form>
+</div>
+
+ <form action='/user/block/{{this.id}}' method='post'>
+   <button style="background-color:white; border: white"type="submit"><i class= "fas fa-ban" style="color:rgb(252, 0, 0)"></i></button>
+  </form>
+</div>
+
+
+{{/each}}
+
+
+
+
+
