@@ -222,7 +222,17 @@ var UserController = {
 		if (!req.session.user_id) {
 			res.redirect("/login");
 		}
-		console.log(req.body)
+		const userProfile = await UserProfile.findOne({
+			useraccount: { _id: req.session.user_id },
+		});
+
+		console.log(req.body.deletedImages)
+		if (req.body.deletedImages){
+			await userProfile.updateOne(
+				{ $pull: {images: 
+					{ filename: { $in: req.body.deletedImages } } }}
+			)
+		}
 		res.redirect(`/user/${req.session.user_id}`);
 	}
 };
