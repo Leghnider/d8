@@ -164,11 +164,12 @@ var UserController = {
 		console.log(userProfile._id)
 		//need to remove their profile_id from liked, likes recieved, matched, blocked, blocked_by of other users
 		await UserProfile.updateMany(
-			{ liked: userProfile._id, 
-				likes_received: userProfile._id, 
-				matched: userProfile._id, 
-				blocked: userProfile._id, 
-				blocked_by: userProfile._id}, 
+			{ $or: [{liked: userProfile._id}, 
+				{likes_received: userProfile._id}, 
+				{matched: userProfile._id}, 
+				{blocked: userProfile._id}, 
+				{blocked_by: userProfile._id}]
+			}, 
 				{$pull: {
 					liked: userProfile._id, 
 					likes_received: userProfile._id, 
