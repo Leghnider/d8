@@ -9,6 +9,9 @@ var UserController = require('../controllers/user');
 router.get('/:id', UserController.UserProfile);
 router.get('/:id/edit', UserController.EditProfile);
 router.post('/:id/edit', UserController.UpdateProfile);
+router.get('/:id/delete', UserController.DeleteProfile);
+router.post('/:id/delete', UserController.RemoveProfile);
+
 router.post('/liked/:id', UserController.LikeProfile);
 router.get('/match/:id', UserController.MatchProfile);
 

@@ -141,6 +141,50 @@ var UserController = {
 		)
 		
 		return res.status(200).redirect(`/user/${req.session.user_id}`);
+	}, 
+	DeleteProfile: async function(req, res){
+		if (!req.session.user_id) {
+			res.redirect("/login");
+		}
+		const user = await User.findById(req.session.user_id);
+		console.log(user)
+		res.render("user/delete", {
+			title: "Delete Profile",
+			user: user
+		});
+	},
+	RemoveProfile: async function (req, res){
+		if (!req.session.user_id) {
+			res.redirect("/login");
+		}
+		const user = await User.findById(req.session.user_id);
+		const userProfile = await UserProfile.findOne({
+			useraccount: { _id: req.session.user_id }
+		})
+		console.log(userProfile._id)
+		//need to remove their profile_id from liked, likes recieved, matched, blocked, blocked_by of other users
+		await UserProfile.updateMany(
+			{ liked: userProfile._id, 
+				likes_received: userProfile._id, 
+				matched: userProfile._id, 
+				blocked: userProfile._id, 
+				blocked_by: userProfile._id}, 
+				{$pull: {
+					liked: userProfile._id, 
+					likes_received: userProfile._id, 
+					matched: userProfile._id, 
+					blocked: userProfile._id, 
+					blocked_by: userProfile._id
+				} 
+			})
+
+		//need to remove their personalityQuestionnaire
+
+		//need to remove user profile and then user account
+
+		// log them out
+		// add a flash message confirming deletion of account
+		return res.status(200).redirect('/register');
 	}
 	
 };

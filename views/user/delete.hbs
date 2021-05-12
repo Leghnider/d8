@@ -1,0 +1,5 @@
+Are you sure you want to delete your account {{user.firstName}}??
+
+<form id="delete-profile-form" action="/user/{{user._id}}/delete" method="POST">
+  <button class="w-100 btn btn-lg btn-primary" type="submit">Delete profile</button>
+</form>
