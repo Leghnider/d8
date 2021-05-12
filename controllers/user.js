@@ -180,14 +180,21 @@ var UserController = {
 			})
 
 		//need to remove their personalityQuestionnaire
-
+		await PersonalityQuestionnaire.findOneAndDelete(
+			{userprofile: { _id: userProfile._id }}
+		)
 		//need to remove user profile and then user account
-
+		await UserProfile.findByIdAndDelete(
+			userProfile._id
+		)
+		await User.findByIdAndDelete(
+			req.session.user_id
+		)
 		// log them out
+		req.session.user_id = null;
 		// add a flash message confirming deletion of account
 		return res.status(200).redirect('/register');
 	}
-	
 };
 
 
