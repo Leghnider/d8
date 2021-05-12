@@ -22,6 +22,25 @@
             <p class="card-text">Contact them on: {{email}}</p>
           </div>
         </div>
+      </div>
+      <div>
+        <div id="photoCarousel" class="carousel slide" data-ride="carousel">
+          <div class="carousel-inner">
+             {{#each profile.images}}
+              <div class="carousel-item {{#if_eq @index 0}} active {{/if_eq}}">
+                <img class="d-block w-100" src="{{this.url}}" alt="{{@index}}-slide">
+              </div>
+              {{/each}}
+          </div>
+          <a class="carousel-control-prev" href="#photoCarousel" role="button" data-slide="prev">
+            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+            <span class="sr-only">Previous</span>
+          </a>
+          <a class="carousel-control-next" href="#photoCarousel" role="button" data-slide="next">
+            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+            <span class="sr-only">Next</span>
+          </a>
+        </div>
       </div> 
     <div class="row">
       <p>Q1. {{questionsAnswers.q1}}</p>
