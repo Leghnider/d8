@@ -1,21 +1,20 @@
-var express = require('express');
+var express = require("express");
 var router = express.Router();
 
-// there will need to be a controllers file in the controllers 
+// there will need to be a controllers file in the controllers
 
-var UserController = require('../controllers/user');
+var UserController = require("../controllers/user");
 
-
-router.get('/:id', UserController.UserProfile);
-router.get('/:id/edit', UserController.EditProfile);
-router.post('/:id/edit', UserController.UpdateProfile);
-router.post('/liked/:id', UserController.LikeProfile);
-router.get('/match/:id', UserController.MatchProfile)
-router.get('/:id/chat', UserController.ChatPage)
+router.get("/:id", UserController.UserProfile);
+router.get("/:id/edit", UserController.EditProfile);
+router.post("/:id/edit", UserController.UpdateProfile);
+router.post("/liked/:id", UserController.LikeProfile);
+router.get("/match/:id", UserController.MatchProfile);
+router.get("/:id/chat", UserController.ChatPage);
+router.post("/:id/chat", UserController.SendChat);
 
 // router.post('/disliked/:id', UserController.DislikeProfile);
 
 // router.get('/user/matches', UserController.EditProfile);
-
 
 module.exports = router;

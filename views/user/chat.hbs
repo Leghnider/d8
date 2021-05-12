@@ -1,15 +1,16 @@
-<h1>Your conversation with {{this.user}} </h1>
+<h1>Your conversation with {{match.username}} </h1>
 <div id="future"></div>
-<form id="form" id="chat_form">
-  <input id="chat_input" type="text">
+<div class="chat-display">
+  {{#each message}}
+  <span> {{message.timestamp}} - {{message.body}} </span>
+  {{/each}}
+</div>
+<form id="form" id="chat_form" action="/user/{{match.id}}/chat" method="post">
+  <input id="chat_input" name="message" type="text">
   <input type="submit" value="Send">
 </form>
+
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-
-<script src="/socket.io/socket.io.js"></script>
-
-
-<script src="/jquery/dist/jquery.js"></script>
 <script src="/socket.io/socket.io.js"></script>
 
 <script>
@@ -20,6 +21,38 @@
   socket.on('broad', function (data) {
     $('#future').append(data + "<br/>");
   });
+  const addMessageToPage = (msg) => {
+    // Append a local client side copy of the message ("Optimistically fetching")
+    const submitButton = document.getElementById("chat-display")
+    const newMessage = document.createElement("span")
+    // const content = `${Date.now()} - ${msg}`
+
+    newMessage.innerText = newMessage;
+
+    // Clear the input
+    const textContent = document.getElementById("current-message")
+
+    textContent.innerText = "";
+
+  }
+  const onPageLoad = () => {
+    const submitButton = document.getElementById("submit")
+    socket.on('connect', function () {
+      // Connected, let's sign-up for to receive messages for this room
+      socket.emit('roomId', {{roomId}});
+    });
+
+    socket.on('message', function (data) {
+      console.log('Incoming message:', data);
+    });
+
+    socket.on("sendMessageEvent", addMessageToPage)
+
+    submitButton.addEventListener("click", onMessageSubmit)
+
+  }
+  window.addEventListener('DOMContentLoaded', onPageLoad);
+
 
   $('form').submit(function (e) {
     e.preventDefault();

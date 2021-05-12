@@ -1,7 +1,8 @@
 var UserProfile = require("../models/userProfile");
 var User = require("../models/userAccount");
 const { socketapi } = require("../socketapi");
-const io = require('socket.io')
+const io = require("socket.io");
+const ChatHistory = require("../models/chatHistory");
 
 // const UserAccount = require("../models/userAccount");
 // var UserMatch = require('../models/userMatch')
@@ -121,8 +122,6 @@ var UserController = {
       const matchProfile = await UserProfile.find({
         _id: { $all: userProfile.matched },
       });
-	  console.log(userProfile)
-	  console.log(matchProfile)
       res.render("user/match", {
         title: "Profiles",
         userProfile: userProfile,
@@ -135,23 +134,72 @@ var UserController = {
     if (!req.session.user_id) {
       res.redirect("/login");
     }
-      const userProfile = await UserProfile.findOne({
-        useraccount: { _id: req.session.user_id },
-      });
-      const roomId = `room-${userProfile._id}-${req.params.id}`
-      
-      var socket = io();
+    const userProfile = await UserProfile.findOne({
+      useraccount: { _id: req.session.user_id },
+    });
 
-      socket.on('create', function (room_id) {
-        socket.join(room_id);
-      });
-   
-      
-      res.render('user/chat', {userProfile: userProfile, roomId: roomId} )
-    
+    const match = await UserProfile.findById({
+      _id: req.params.id,
+    });
+
+    console.log(match.username);
+
+    const roomId = `room-${userProfile._id}-${match._id}`;
+
+    var socket = io();
+
+    socket.on("create", function (roomId) {
+      socket.join(roomId);
+      console.log("Room joined!")
+    });
+
+    const message_history = ChatHistory.findById({
+      conversation_id: roomId,
+    });
+
+    res.render("user/chat", {
+      userProfile: userProfile,
+      roomId: roomId,
+      match: match,
+      chat_history: message_history
+    });
+  },
+
+  SendChat: async (req, res) => {
+    if (!req.session.user_id) {
+      res.redirect("/login");
     }
 
-  }
+    const userProfile = await UserProfile.findOne({
+      useraccount: { _id: req.session.user_id },
+    });
 
+    const match = await UserProfile.findById({
+      _id: req.params.id,
+    });
+
+    const roomId = `room-${userProfile._id}-${match._id}`;
+
+    var socket = io();
+
+    const message_history = await ChatHistory.findOne({
+      conversation_id: roomId,
+    });
+    
+    socket.join
+    if (message_history) {
+      message_history.chat_history.push(req.body.message)
+      var history = await message_history.save();
+      console.log(history)
+    } else {
+      ChatHistory.create({
+        conversation_id: roomId,
+        chat_history: [req.body.message]
+      });
+    }
+
+    socket.to(roomId).emit({ message: req.body.message })
+  },
+};
 
 module.exports = UserController;
