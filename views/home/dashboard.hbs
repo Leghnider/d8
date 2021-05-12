@@ -24,7 +24,12 @@
         <input type="submit" value="Filter Results">
       </form>
     </div>
-
+    {{!-- Space for random like button --}}
+    <div class="row">
+      <form id="random-like-form" action="/random" method="post">
+        <button class="btn btn-primary" value="random-like"> Randomly Like </button>
+      </form>
+    </div>
     <div class="row py-2">
       {{#each userProfiles}}
         <div class="col-lg-4 col-md-6 col-12 py-2">

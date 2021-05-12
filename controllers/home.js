@@ -251,6 +251,13 @@ var HomeController = {
  
     res.render('profiles/filtered', {title:"Filtered Profiles", searchResults: searchResults})
   },
+  RandomLike: async function (req, res) {
+    
+
+
+    
+    res.redirect("/home");
+  },
   Logout: function (req, res) {
     req.session.user_id = null;
     if (req.session.user_id === null) {
