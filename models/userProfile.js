@@ -31,8 +31,9 @@ var UserProfileSchema = new mongoose.Schema({
   }],
   liked: [{ type: String }],
   likes_received: [{type: String}],
-  matched: [{ type: String }]
-
+  matched: [{ type: String }],
+  blocked: [{ type: String }],
+  blocked_by: [{ type: String }],
 })
 
 var UserProfile = mongoose.model('UserProfile', UserProfileSchema);

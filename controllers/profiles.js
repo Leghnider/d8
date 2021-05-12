@@ -1,5 +1,6 @@
 const UserProfile = require("../models/userProfile");
 const User = require('../models/userAccount')
+const PersonalityQuestionnaire = require('../models/personalityQuestionnaire')
 
 var ProfilesController = {
   ShowProfile: async (req, res) => {
@@ -8,9 +9,9 @@ var ProfilesController = {
     }
     const profile = await UserProfile.findById(req.params.id)
     const user = await User.findById(profile.useraccount)
+    const questionsAnswers = await PersonalityQuestionnaire.findOne({userprofile: {_id: profile._id}})
     const email = await user.email
-    console.log(profile)
-    res.render('profiles/show', { profile: profile, email: email })
+    res.render('profiles/show', { profile: profile, email: email, questionsAnswers: questionsAnswers })
   }
 };
 
