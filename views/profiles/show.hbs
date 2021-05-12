@@ -38,12 +38,83 @@
         </div>
       </div>
     <div class="row">
-      <p>Q1. {{questionsAnswers.q1}}</p>
-      <p>Q2. {{questionsAnswers.q2}}</p>
-      <p>Q3. {{questionsAnswers.q3}}</p>
-      <p>Q4. {{questionsAnswers.q4}}</p>
-      <p>Q5. {{questionsAnswers.q5}}</p>
-    </div> 
+      <div id="accordion">
+        <div class="card">
+          <div class="card-header" id="questionOne">
+            <h5 class="mb-0">
+              <button class="btn btn-link" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                Q1. What is your go-to Karaoke song?
+              </button>
+            </h5>
+          </div>
+
+          <div id="collapseOne" class="collapse show" aria-labelledby="questionOne" data-parent="#accordion">
+            <div class="card-body">
+              {{questionsAnswers.q1}}
+            </div>
+          </div>
+        </div>
+        <div class="card">
+          <div class="card-header" id="questionTwo">
+            <h5 class="mb-0">
+              <button class="btn btn-link collapsed" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+                Q2. If you could live anywhere in the world, where would it be and why? 
+              </button>
+            </h5>
+          </div>
+          <div id="collapseTwo" class="collapse" aria-labelledby="questionTwo" data-parent="#accordion">
+            <div class="card-body">
+              {{questionsAnswers.q2}}            
+            </div>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="card-header" id="questionThree">
+            <h5 class="mb-0">
+              <button class="btn btn-link collapsed" data-toggle="collapse" data-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+                Q3. Have you ever had a nickname? What is it?
+              </button>
+            </h5>
+          </div>
+          <div id="collapseThree" class="collapse" aria-labelledby="questionThree" data-parent="#accordion">
+            <div class="card-body">
+              {{questionsAnswers.q3}}
+            </div>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="card-header" id="questionFour">
+            <h5 class="mb-0">
+              <button class="btn btn-link collapsed" data-toggle="collapse" data-target="#collapseFour" aria-expanded="false" aria-controls="collapseFour">
+                Q4. What's the craziest thing you’ve done in the name of love? (Doesn't necessarily have to be love for a particular person)
+              </button>
+            </h5>
+          </div>
+          <div id="collapseFour" class="collapse" aria-labelledby="questionFour" data-parent="#accordion">
+            <div class="card-body">
+              {{questionsAnswers.q4}}
+            </div>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="card-header" id="questionFive">
+            <h5 class="mb-0">
+              <button class="btn btn-link collapsed" data-toggle="collapse" data-target="#collapseFive" aria-expanded="false" aria-controls="collapseFive">
+                Q5. What would you do if you won the lottery?
+              </button>
+            </h5>
+          </div>
+          <div id="collapseFive" class="collapse" aria-labelledby="questionFive" data-parent="#accordion">
+            <div class="card-body">
+              {{questionsAnswers.q5}}
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>  
     <div class="row py-4" >
     </div>
   </section>
