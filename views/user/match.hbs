@@ -5,10 +5,38 @@
     <img src="{{this.url}}" alt="image" class="class img-fluid" width="200" height="200" ;>
  {{/each}}
     {{this.username}}
-  <a href="/user/{{this._id}}/chat">Chat</a>  
+    <input type="hidden" id="matchId" value={{this._id}}>
+    
+    <button class="chat-button" data-id={{this._id}}>
+      <a href="/user/chat/{{this._id}}">Chat</a></button> 
+     
+{{/each}}
+<input type="hidden" id="userId" value={{this._id}}>
 {{/each}}
 
+<script>
+      const UserId = document.getElementById('userId').value
+  const theirUserId = document.getElementById('matchId').value
+  console.log(theirUserId)
+  console.log(UserId)
 
-{{/each}}
+      const onButtonClicked = (e) => {
+    
+        const payload = { UserId, theirUserId }
+      
+
+        window.location = `http://localhost:3000/user/chat/${userId}-${theirUserId}`
+      }
+
+      const initialize = () => {
+        const theirUserId = document.getElementById('matchId').value
+        
+        const allButtons = document.querySelectorAll(".chat-link")
+
+        allButtons.forEach((b) => b.addEventListener("click", onButtonClicked))
+      }
+
+      window.addEventListener("DOMContentLoaded", initialize)
+    </script>
 
 

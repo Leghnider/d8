@@ -1,7 +1,8 @@
 var UserProfile = require("../models/userProfile");
 var User = require("../models/userAccount");
-const { socketapi } = require("../socketapi");
-const io = require('socket.io')
+const SocketServer  = require("../socket-server");
+
+
 
 // const UserAccount = require("../models/userAccount");
 // var UserMatch = require('../models/userMatch')
@@ -135,19 +136,48 @@ var UserController = {
     if (!req.session.user_id) {
       res.redirect("/login");
     }
+    const { connectionString } = req.params
+    console.log(connectionString)
+
       const userProfile = await UserProfile.findOne({
         useraccount: { _id: req.session.user_id },
       });
-      const roomId = `room-${userProfile._id}-${req.params.id}`
-      
-      var socket = io();
+      const userId = userProfile._id
+      const matchId = req.params.id
 
-      socket.on('create', function (room_id) {
-        socket.join(room_id);
-      });
-   
+      let rooms = [];
+      const roomName = `${userId}-${matchId}`
+      console.log(roomName);
+      console.log(rooms);
+
+      const getReverse = (roomName) => roomName.split("-").reverse().join("-");
+
+      const addActiveRoom = (roomName) => {
+    if (!rooms.find((r) => r === roomName && r === getReverse(roomName))) {
+      rooms.push(roomName);
+    }
+  };
+    const getActiveRoom = (roomName) => {
+    return rooms.find((r) => r === roomName || r === getReverse(roomName));
+  };
+
       
-      res.render('user/chat', {userProfile: userProfile, roomId: roomId} )
+      SocketServer.getSocketServer().of(`/${connectionString}`).on("connection", (roomName) => {
+        roomName.on("SEND_MESSAGE", (msg) => {
+          // When a user sends a message ...
+          console.log(msg);
+    
+          // Add the message to the conversation history in database
+    
+          // Validate its not hate speech ?
+    
+          // Emit it to all connected clients
+          roomName.emit("RECEIVE_MESSAGE", msg);
+        });
+      });
+      
+      
+      res.render('user/chat', {userProfile: userProfile, channel: `/${connectionString}`, userId: userId, matchId: matchId} )
     
     }
 

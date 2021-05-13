@@ -1,58 +1,42 @@
- 
-    <script src="/socket.io/socket.io.js"></script>
-   <body>
-      <div> 
-  <h3> Your conversation with {{user_name}} </h3>
-  <div class="chat-display">
-    {{#each message}}
-      <span>{{message.timestamp}}-{{message.body}}</span>
-    {{/each}}
-  </div>
-  <input id="current-message"/>
-  <button id="submit-button"></button>
-</div>
-  <script> 
-  var socket = io();
+<html>
+  <head>
+    <title>My lil chat client</title>
+    <script src="https://cdn.socket.io/3.1.3/socket.io.min.js" integrity="sha384-cPwlPLvBTa3sKAgddT6krw0cJat7egBga3DJepJyrLl4Q9/5WLra3rrnMcyTyOnh" crossorigin="anonymous"></script>
+  </head>
+  <body>
 
-  const addMessageToPage = (msg) => {
-    // Append a local client side copy of the message ("Optimistically fetching")
-    const submitButton = document.getElementById("chat-display")
-    const newMessage = document.createElement("span")
-    const content = `${Date.now()} - ${msg}`
+    <div>
+      <h3>History</h3>
+      {{#each history}}
+        <li>{{history.time}} - {{history.body}}</li>
+      {{/each}}
+      <ul id="conversation-history"></ul>
+    </div>
 
-    newMessage.innerText = newMessage;
+    <input id="chat-send" class="chat-input"/>
+    <button id="send-button">Send</button>
+    <script>
+      function initialize() {
+        const socket = io("{{channel}}");
+        const sendButton = document.getElementById("send-button")
+        const history = document.getElementById("conversation-history")
 
-    // Clear the input
-    const textContent = document.getElementById("current-message")
+        sendButton.addEventListener("click", () => {
+          const currentText = document.getElementById("chat-send").value
 
-    textContent.innerText = "";
+          socket.emit("SEND_MESSAGE", currentText)
+        })
 
-  }
+        socket.on("RECEIVE_MESSAGE", (msg) => {
+          const newChat = document.createElement("li")
 
-  const onMessageSubmit = () => {
-     const textContent = document.getElementById("current-message")
+          newChat.innerText = msg;
 
-     try {
-			 // "In my room, send a message using the key "sendMessage"
-	     socket.emit("sendMessageEvent", JSON.stringify({ roomId: "{{roomId}}", body: textContent.innerText, timestamp: Date.now() }))
-     }
-     catch(err) {
-       console.log(err)
-     }
-  }
+          history.appendChild(newChat);
+        })
+      }
 
-  const onPageLoad = () => {
-    const submitButton = document.getElementById("submit-button")
-
-    socket.connect("{{roomId}}")
-		
-		socket.on("sendMessageEvent", addMessageToPage)
-	
-    submitButton.addEventListener("click", onMessageSubmit)
-  }
-
-  window.addEventListener("DOMContentLoaded", onPageLoad)
-</script>
-   
-</body>
+      window.addEventListener("DOMContentLoaded", initialize)
+    </script>
+  </body>
 </html>

@@ -7,8 +7,10 @@ var express = require('express');
 var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
+const http = require('http');
 const session = require('express-session');
-var socketapi = require("./socketapi");
+const { Server } = require('socket.io');
+const SocketServer = require("./socket-server")
 
 
 var homeRouter = require('./routes/home');
@@ -17,6 +19,13 @@ var profilesRouter = require('./routes/profiles');
 
 var app = express();
 var hbs = require('hbs');
+
+// Initialize socket server
+const server = http.createServer(app);
+const io = new Server(server);
+
+// Store the io server so that any controller can use it
+SocketServer.setSocketServer(io);
 
 hbs.registerPartials(__dirname + '/views/partials', function (err) {});
 
@@ -62,4 +71,4 @@ app.use(function(err, req, res) {
   res.render('error');
 });
 
-module.exports = { app, socketapi }
+module.exports = { app: app , server: server }
