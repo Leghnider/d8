@@ -88,32 +88,33 @@ var UserController = {
 
 		if (isMatched === true) {
 			await UserProfile.findByIdAndUpdate(otherUser, {
-				$push: {matched: userInfo._id}
+				$addToSet: {matched: userInfo._id}
 			})
 			await UserProfile.findByIdAndUpdate(userInfo, {
-				$push: {matched: req.params.id}
+				$addToSet: {matched: req.params.id}
 			})
 		}
 		return res.status(200).redirect("/home");
 	},
 
 	MatchProfile: async (req, res) => {
-		// if (!req.session.user_id) {
-		// 	res.redirect("/login");
-		// } else {
+		if (!req.session.user_id) {
+			res.redirect("/login");
+		} else {
 		const user = await User.findById(req.session.user_id);
 		const userProfile = await UserProfile.findOne({
 		useraccount: { _id: req.session.user_id }})
 		const matchProfile = await UserProfile.find({_id:  {$all: userProfile.matched}})
 
 		res.render("user/match", {
-			// title: "Profiles",
+			title: "Matches",
 			userProfile: userProfile,
-      // user: user,
+      user: user,
 			matchProfile: matchProfile
 		}
 	);
-		},
+		}
+	},
 	UnmatchProfile: async function(req, res){
 		const userProfile = await UserProfile.findOne({
 			useraccount: { _id: req.session.user_id }

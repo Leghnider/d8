@@ -18,6 +18,11 @@
                       <img class="card-img-top img-fluid d-block" src="{{this.url}}" alt="Card image cap" class="class img-fluid";>
                       {{/each}}
                     </div>
+                    <div class="row py-1 mx-auto">
+                        <form action='/user/liked/{{this.id}}' method='post'>
+                          <button style="background-color:white; border: white; text-align: center" type="submit"><i class= "fas fa-heart fa-2x" style="color: #e80d4a"></i></button>
+                        </form>
+                    </div>
                     <div class="card-body-bio">
                       <h5><a style="text-decoration: none;" href="/profiles/{{this._id}}">{{this.username}}</a></h5>
                       {{!-- <p class="card-text">Age: {{this.age}}</p>
@@ -25,11 +30,7 @@
                       <p class="card-text">Interested in: {{this.interested_in}}</p>
                       <p class="card-text">Location: {{this.location}}</p> --}}
                       <p class="card-text">{{this.bio}}</p>
-                      <div class="row py-1 mx-auto">
-                        <form action='/user/liked/{{this.id}}' method='post'>
-                          <button style="background-color:white; border: white; text-align: center" type="submit"><i class= "fas fa-heart fa-2x" style="color: #e80d4a"></i></button>
-                        </form>
-                      </div>
+                      
                     </div>
                   </div>  
                 </div> 

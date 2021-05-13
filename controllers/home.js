@@ -309,10 +309,10 @@ var HomeController = {
 
     if (isMatched === true) {
 			await UserProfile.findByIdAndUpdate(randomLike._id, {
-				$push: {matched: user_profile_details._id}
+				$addToSet: {matched: user_profile_details._id}
 			})
 			await UserProfile.findByIdAndUpdate(user_profile_details._id, {
-				$push: {matched: randomLike._id}
+				$addToSet: {matched: randomLike._id}
 			})
 		};
 
