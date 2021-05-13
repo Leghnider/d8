@@ -188,6 +188,9 @@ var HomeController = {
   },
 
   Filter: async(req, res) => {
+    if (!req.session.user_id) {
+			res.redirect("/login");
+		}
 
     var minage = 18;
     var maxage = 100;
@@ -254,6 +257,9 @@ var HomeController = {
     res.render('profiles/filtered', {title:"Filtered Profiles", searchResults: searchResults, user: user})
   },
   RandomLike: async function (req, res) {
+    if (!req.session.user_id) {
+			res.redirect("/login");
+		}
     // this is from the dashboard - need to get the array of search results
     const user = await User.findById(req.session.user_id);
 

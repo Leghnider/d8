@@ -60,6 +60,9 @@ var UserController = {
 	},
 
 	LikeProfile: async function (req, res) {
+		if (!req.session.user_id) {
+			res.redirect("/login");
+		}
 		const userInfo = await UserProfile.findOne({
 			useraccount: { _id: req.session.user_id },
 		});
@@ -117,6 +120,9 @@ var UserController = {
 		}
 	},
 	UnmatchProfile: async function(req, res){
+		if (!req.session.user_id) {
+			res.redirect("/login");
+		}
 		const userProfile = await UserProfile.findOne({
 			useraccount: { _id: req.session.user_id }
 		})
@@ -134,6 +140,9 @@ var UserController = {
 		return res.status(200).redirect(`/user/${req.session.user_id}`);
 	},
 	BlockProfile: async function(req, res){
+		if (!req.session.user_id) {
+			res.redirect("/login");
+		}
 		const userProfile = await UserProfile.findOne({
 			useraccount: { _id: req.session.user_id }
 		})
