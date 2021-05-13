@@ -8,11 +8,11 @@ body {
 }
 
 #homepage-content section{
-  background-color: #ff6f98;
+  background-color: #fc8aab;
 }
 
 #homepage-navbar{
-  background-color: #e80d4a;
+  background-color: #fc8aab;
   font-size: 1.25rem;
 }
 
@@ -31,7 +31,7 @@ body {
 }
 
 #navbar2{
-  background-color: #e80d4a;
+  background-color: #fc8aab;
   font-size: 1.25rem;
 }
 
@@ -58,7 +58,7 @@ body {
   width: 100%;
   position: fixed;
   bottom: 0;
-  background-color: #e80d4a;
+  background-color: #fc8aab;
   color: white;
 }
 
