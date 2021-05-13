@@ -1,16 +1,20 @@
 var mongoose = require("mongoose");
 
-var ChatHistorySchema = new mongoose.Schema(
-  {
-    conversation_id: {
-      type: String,
-    },
-    chat_history: [
-      {
-        type: String,
-      },
-    ],
+var ChatHistorySchema = new mongoose.Schema({
+  chat: 
+    {
+  chat_history: {
+    type: [String],
+    trim: true,
   },
+ 
+    userprofile: [{type: mongoose.Schema.Types.ObjectId, ref: "UserProfile"}],
+    },
+    conversation_id: [{
+      type: String,
+    }],
+  },
+ 
   {
     timestamps: true,
   }

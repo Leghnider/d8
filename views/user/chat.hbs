@@ -1,8 +1,8 @@
 <h1>Your conversation with {{match.username}} </h1>
 <div id="future"></div>
 <div class="chat-display">
-  {{#each message_history}}
-  <span> {{this.chat_history}} - {{this.timestamps}} </span>
+  {{#each this.message_history}}
+  <span> {{this.chat.chat_history}} - </span>
   {{/each}}
 </div>
 <form id="form" id="chat_form" action="/user/{{match._id}}/chat" method="post">

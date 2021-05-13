@@ -121,24 +121,25 @@ var UserController = {
     });
 
     const match = await UserProfile.findById({
-      _id: req.params.id,
-    });
+      _id: req.params.id });
 
 
     const roomId =  [userProfile._id, match._id]
 
     const message_history = await ChatHistory.findOne({
       conversation_id: {$all: [userProfile._id, match._id]}
-    });
+    })
     
     if (!message_history) {
       ChatHistory.create({
         conversation_id: roomId,
+        chat: {
         chat_history: [req.body.message],
         userprofile: userProfile._id
-      });
-    }
-  
+        }
+      })
+      };
+    
     res.render("user/chat", {
       userProfile: userProfile,
       roomId: roomId,
@@ -164,13 +165,23 @@ var UserController = {
     const message_history = await ChatHistory.findOne({
       conversation_id: {$all: [userProfile._id, match._id]}
     });
-    
+
+    const userprofile = await ChatHistory.find({
+    "chat.userprofile": match._id
+    });
+    // console.log(userprofile)
+
 
     if (message_history) {
-      message_history.chat_history.push(req.body.message)
-      var history = await message_history.save();
-      console.log(history)
-    }
+      message_history.chat.chat_history.push(req.body.message)
+    var history = await message_history.save();
+      //console.log(history)
+     } 
+
+      
+
+      
+    
     
   res.redirect('back')
   }
