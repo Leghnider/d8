@@ -34,6 +34,10 @@
     <div class="row">
       <div class="col-8 mx-auto py-3">
         <h2>Your Photos</h2>
+        <p>These can be viewed by other users</p>
+        {{#if_eq userProfile.images.length 0}}
+          <p>You have not uploaded any additional images for others to view</p>
+        {{/if_eq}}
         <div>
           <form id="delete-images-form" action="/user/{{user._id}}/deletePhotos" method="post">
           <div class="row py-2">
@@ -47,14 +51,14 @@
               </div>
             {{/each}}
           </div>
-          <button class="w-100 btn btn-lg btn-primary" type="submit">Delete photos</button>
+          <button class="w-100 btn btn-primary card-btn btn-a" type="submit">Delete photos</button>
           </form>     
         </div>
         <div>
           <form id="add-images-form" action="/user/{{user._id}}/addPhoto" method="post" enctype="multipart/form-data">
             <label for="image">Upload pictures</label>
             <input style="margin-top: 10px" type='file' name="image" id="image" multiple>
-            <button class="w-100 btn btn-lg btn-primary" type="submit">Add photos</button>
+            <button class="w-100 btn btn-primary card-btn btn-a" type="submit">Add photos</button>
           </form>       
         </div>  
       </div>
