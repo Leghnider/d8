@@ -58,10 +58,7 @@ var HomeController = {
   },
   CreateProfile: async function (req, res) {
     const user = await User.findById(req.session.user_id);
-    console.log(user.age)
-    // const { username, bio, location, gender, age, interested_in } = req.body;
     const { username, bio, location, gender, interested_in } = req.body;
-
 
     var checkUsername = await UserProfile.findOne({ username });
 
@@ -79,16 +76,6 @@ var HomeController = {
       interested_in,
       useraccount: user._id,
     });
-    // var userProfile = new UserProfile({
-    //   username,
-    //   bio,
-    //   location,
-    //   gender,
-    //   interested_in,
-    //   useraccount: user._id,
-    // });
-
-    // userProfile.age = user.age
 
     userProfile.profileImages = req.files.map((f) => ({
       url: f.path,

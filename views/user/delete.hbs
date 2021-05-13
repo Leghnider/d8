@@ -1,5 +1,27 @@
-Are you sure you want to delete your account {{user.firstName}}??
+{{> navbar2}}
 
-<form id="delete-profile-form" action="/user/{{user._id}}/delete" method="POST">
-  <button class="w-100 btn btn-lg btn-primary" type="submit">Delete profile</button>
-</form>
+<div class="content-container container">
+  <main class="form-delete">
+    <div class="row py-2 ">
+      <div class="card">
+        <div class="card-body">
+          <h3>{{user.firstName}}, are you sure you want to delete your account?</h3>
+          <div class="row">
+            <div class="col-6 justify-content-center" >
+              <form id="delete-profile-form" action="/user/{{user._id}}/delete" method="POST">
+                <button class="btn btn-sm btn-primary" type="submit">Delete profile</button>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-6 justify-content-center">
+          <button type="button" class="btn btn-primary btn-sm">
+            <a style="text-decoration: none;" href="/home">Back to Dashboard</a>
+          </button> 
+        </div> 
+    </div>
+  </main>
+</div>
