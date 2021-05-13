@@ -93,6 +93,7 @@ var UserController = {
 			await UserProfile.findByIdAndUpdate(userInfo, {
 				$addToSet: {matched: req.params.id}
 			})
+			req.flash('match', 'You have a match');
 		}
 		return res.status(200).redirect("/home");
 	},

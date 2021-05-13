@@ -183,6 +183,7 @@ var HomeController = {
       title: "Home",
       userProfiles: searchResults,
       user: user,
+      messages: req.flash('match')
     });
   },
 
@@ -316,8 +317,9 @@ var HomeController = {
 			await UserProfile.findByIdAndUpdate(user_profile_details._id, {
 				$addToSet: {matched: randomLike._id}
 			})
+      req.flash('match', 'You have a match');
 		};
-
+    
     res.redirect("/home");
   },
   Logout: function (req, res) {

@@ -8,6 +8,11 @@
           {{#if_eq userProfiles.length 0}}
             <p>Unforturnately their are no other users to 'like', please try again later</p>
           {{/if_eq}}
+          {{#if messages}}
+            <div class="alert alert-success" role="alert">
+              <p>{{messages}} go to <a href="/user/match/{{user._id}}">My Matches</a> to view your match</p>
+            </div>
+            {{/if}}
           <div id="dashboardCarousel" class="carousel slide" data-interval="false">
             <div class="carousel-inner">
               {{#each userProfiles}}
