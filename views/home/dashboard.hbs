@@ -1,56 +1,112 @@
 <section id="dashboard-page">
   {{> navbar2}}
   <section class="container-fluid">
-    <div class="row py-2">
-      <h1><a style="text-decoration: none;" href="/user/{{user._id}}">{{user.firstName}}</a> - Your Potential D8s</h1>
-    </div>
-{{!-- Space for the filtering form --}}
-    <div>
-      <form class="filterResults" action="/filtered" method="get">
-        <p>Age</p>
-        <label for="minage">Min Age:</label>
-        <input id="minage" type="number" name="minage" min="18" max="100" placeholder="18">
-        <label for="maxage">Min Age:</label>
-        <input id="maxage" type="number" name="maxage" min="18" max="100" placeholder="100">
-        <p>Location: </p>
-        <label for="location1">North London</label>
-        <input type="checkbox" id="location1" name="location" value="North London">
-        <label for="location2">West London</label>
-        <input type="checkbox" id="location2" name="location" value="West London">
-        <label for="location3">South London</label>
-        <input type="checkbox" id="location3" name="location" value="South London">
-        <label for="location4">East London</label>
-        <input type="checkbox" id="location4" name="location" value="East London">
-        <input type="submit" value="Filter Results">
-      </form>
-    </div>
-
-    <div class="row py-2">
-      {{#each userProfiles}}
-        <div class="col-lg-4 col-md-6 col-12 py-2">
-          <div class="card mx-auto" style="width: 20rem;">
-            <div class="card-img-top">
-              {{#each this.profileImages}}
-              <img class="card-img-top img-fluid" src="{{this.url}}" alt="Card image cap" class="class img-fluid";>
+    <div class="row py-4">
+      <div class="col-8">
+        <div class="row py-2">
+          <h3><a style="text-decoration: none;" href="/user/{{user._id}}">{{user.firstName}}</a> - Your Potential D8s</h3>
+          <div id="dashboardCarousel" class="carousel slide" data-interval="false">
+            <div class="carousel-inner">
+              {{#each userProfiles}}
+                <div class="carousel-item {{#if_eq @index 0}} active {{/if_eq}}">
+                  <div class="card mx-auto" style="width: 35rem;">
+                    <div class="card-img-top card-img-top-dasboard";">
+                      {{#each this.profileImages}}
+                      <img class="card-img-top img-fluid d-block" src="{{this.url}}" alt="Card image cap" class="class img-fluid";>
+                      {{/each}}
+                    </div>
+                    <div class="card-body-bio">
+                      <h5><a style="text-decoration: none;" href="/profiles/{{this._id}}">{{this.username}}</a></h5>
+                      {{!-- <p class="card-text">Age: {{this.age}}</p>
+                      <p class="card-text">Gender: {{this.gender}}</p>
+                      <p class="card-text">Interested in: {{this.interested_in}}</p>
+                      <p class="card-text">Location: {{this.location}}</p> --}}
+                      <p class="card-text">{{this.bio}}</p>
+                      <div class="row py-1 mx-auto">
+                        <form action='/user/liked/{{this.id}}' method='post'>
+                          <button style="background-color:white; border: white; text-align: center" type="submit"><i class= "fas fa-heart fa-2x" style="color: #e80d4a"></i></button>
+                        </form>
+                      </div>
+                    </div>
+                  </div>  
+                </div> 
               {{/each}}
             </div>
-            <div class="card-body-bio">
-              <h5><a style="text-decoration: none;" href="/profiles/{{this._id}}">{{this.username}}</a></h5>
-              {{!-- <p class="card-text">Age: {{this.age}}</p>
-              <p class="card-text">Gender: {{this.gender}}</p>
-              <p class="card-text">Interested in: {{this.interested_in}}</p>
-              <p class="card-text">Location: {{this.location}}</p> --}}
-              <p class="card-text">{{this.bio}}</p>
-            </div>
-            {{!-- {{#if (hasLiked this.likes userId._id)}} --}}
-   <form action='/user/liked/{{this.id}}' method='post'>
-   <button style="background-color:white; border: white"type="submit"><i class= "fas fa-heart fa-2x" style="color:rgb(95, 191, 95)"></i></button>
-  </form>
-            <button type="button" class="btn btn-primary card-btn">Like</button>
-          </div>   
+            <a class="carousel-control-prev" style="color: #e80d4a" href="#dashboardCarousel" role="button" data-slide="prev">
+              <i class="fa fa-angle-left"></i><i class="fa fa-angle-left"></i>
+              <span class="carousel-control-prev-icon" aria-hidden="false"></span>
+              <span class="sr-only">Previous</span>
+            </a>
+            <a class="carousel-control-next" style="color: #e80d4a" href="#dashboardCarousel" role="button" data-slide="next">
+              <i class="fa fa-angle-right"></i><i class="fa fa-angle-right"></i>
+              <span class="carousel-control-next-icon" aria-hidden="false"></span>
+              <span class="sr-only">Next</span>
+            </a>
+          </div>
         </div>
-      {{/each}}
+      </div>
+      <div class="col-4 mx-auto">
+        <div class="row py-3">
+          <h4>Take a 'chance' on love</h4>
+          <form id="random-like-form" action="/random" method="post">
+            <button class="btn btn-primary" value="random-like"> <h5>Randomly</h5> <i class= "fas fa-heart fa-2x" style="color: #e80d4a"></i> </button>
+          </form>
+        </div>
+        
+        <h4>Filter your search results</h4>
+        <form class="filterResults" action="/filtered" method="get">
+          <h5>Age: </h5>
+          <label for="minage">Min Age:</label>
+          <input id="minage" type="number" name="minage" min="18" max="100" placeholder="18">
+          <label for="maxage">Min Age:</label>
+          <input id="maxage" type="number" name="maxage" min="18" max="100" placeholder="100">
+          <h5>Location: </h5>
+          <label for="location1">North London</label>
+          <input type="checkbox" id="location1" name="location" value="North London">
+          <label for="location2">West London</label>
+          <input type="checkbox" id="location2" name="location" value="West London">
+          <label for="location3">South London</label>
+          <input type="checkbox" id="location3" name="location" value="South London">
+          <label for="location4">East London</label>
+          <input type="checkbox" id="location4" name="location" value="East London">
+          <div class="py-3">
+            <input type="submit" value="Filter Results">
+          </div>
+        </form>
+      </div>
+
     </div>
+{{!-- Space for the filtering form --}}
+
+    {{!-- <div class="row py-4">
+      <div class="col-7 px-4">
+        <h4>Filter your search results</h4>
+        <form class="filterResults" action="/filtered" method="get">
+          <h5>Age: </h5>
+          <label for="minage">Min Age:</label>
+          <input id="minage" type="number" name="minage" min="18" max="100" placeholder="18">
+          <label for="maxage">Min Age:</label>
+          <input id="maxage" type="number" name="maxage" min="18" max="100" placeholder="100">
+          <h5>Location: </h5>
+          <label for="location1">North London</label>
+          <input type="checkbox" id="location1" name="location" value="North London">
+          <label for="location2">West London</label>
+          <input type="checkbox" id="location2" name="location" value="West London">
+          <label for="location3">South London</label>
+          <input type="checkbox" id="location3" name="location" value="South London">
+          <label for="location4">East London</label>
+          <input type="checkbox" id="location4" name="location" value="East London">
+          <div class="py-3">
+            <input type="submit" value="Filter Results">
+          </div>
+        </form>
+      </div>
+    </div> --}}
+
+
+
+
+
     <div class="row py-6" style="height: 5rem;">
     </div>
   </section>

@@ -49,6 +49,13 @@ var UserController = {
 			location: req.body.location,
 			age: req.body.age,
 		});
+
+		userProfile.profileImages = req.files.map((f) => ({
+      url: f.path,
+      filename: f.filename,
+    }));
+		await userProfile.save()
+
 		res.status(201).redirect(`/user/${req.session.user_id}`);
 	},
 
@@ -141,8 +148,93 @@ var UserController = {
 		)
 		
 		return res.status(200).redirect(`/user/${req.session.user_id}`);
+	}, 
+	DeleteProfile: async function(req, res){
+		if (!req.session.user_id) {
+			res.redirect("/login");
+		}
+		const user = await User.findById(req.session.user_id);
+		console.log(user)
+		res.render("user/delete", {
+			title: "Delete Profile",
+			user: user
+		});
+	},
+	RemoveProfile: async function (req, res){
+		if (!req.session.user_id) {
+			res.redirect("/login");
+		}
+		const user = await User.findById(req.session.user_id);
+		const userProfile = await UserProfile.findOne({
+			useraccount: { _id: req.session.user_id }
+		})
+		console.log(userProfile._id)
+
+		await UserProfile.updateMany(
+			{ $or: [{liked: userProfile._id}, 
+				{likes_received: userProfile._id}, 
+				{matched: userProfile._id}, 
+				{blocked: userProfile._id}, 
+				{blocked_by: userProfile._id}]
+			}, 
+				{$pull: {
+					liked: userProfile._id, 
+					likes_received: userProfile._id, 
+					matched: userProfile._id, 
+					blocked: userProfile._id, 
+					blocked_by: userProfile._id
+				} 
+			})
+
+		await PersonalityQuestionnaire.findOneAndDelete(
+			{userprofile: { _id: userProfile._id }}
+		)
+		await UserProfile.findByIdAndDelete(
+			userProfile._id
+		)
+		await User.findByIdAndDelete(
+			req.session.user_id
+		)
+		req.session.user_id = null;
+		if (req.session.user_id === null){
+      req.flash('err', 'You have sucessfully deleted your account');
+      res.redirect('/register');
+    }
+	},
+	AddPhoto: async function (req, res){
+		if (!req.session.user_id) {
+			res.redirect("/login");
+		}
+		const userProfile = await UserProfile.findOne({
+			useraccount: { _id: req.session.user_id },
+		});
+		const imgs = req.files.map((f) => ({
+      url: f.path,
+      filename: f.filename,
+    }));
+
+		userProfile.images.push(...imgs)
+		await userProfile.save()
+
+		res.redirect(`/user/${req.session.user_id}`);
+	},
+	DeletePhoto: async function (req, res){
+		if (!req.session.user_id) {
+			res.redirect("/login");
+		}
+		const userProfile = await UserProfile.findOne({
+			useraccount: { _id: req.session.user_id },
+		});
+
+		console.log(req.body.deletedImages)
+		if (req.body.deletedImages){
+			await userProfile.updateOne(
+				{ $pull: {images: 
+					{ filename: { $in: req.body.deletedImages } } }}
+			)
+		}
+		res.redirect(`/user/${req.session.user_id}`);
 	}
-	
 };
 
 
