@@ -11,7 +11,7 @@ var ProfilesController = {
     const user = await User.findById(profile.useraccount)
     const questionsAnswers = await PersonalityQuestionnaire.findOne({userprofile: {_id: profile._id}})
     const email = await user.email
-    res.render('profiles/show', { profile: profile, email: email, questionsAnswers: questionsAnswers })
+    res.render('profiles/show', { profile: profile, email: email, questionsAnswers: questionsAnswers, user: user })
   }
 };
 
