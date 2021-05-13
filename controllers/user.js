@@ -135,7 +135,7 @@ var UserController = {
         conversation_id: roomId,
         chat: {
         chat_history: [req.body.message],
-        userprofile: userProfile._id
+        userprofile: userProfile.username
         }
       })
       };
@@ -165,12 +165,10 @@ var UserController = {
     const message_history = await ChatHistory.findOne({
       conversation_id: {$all: [userProfile._id, match._id]}
     });
+    console.log(message_history)
 
-    const userprofile = await ChatHistory.find({
-    "chat.userprofile": match._id
-    });
-    // console.log(userprofile)
-
+    const username = await ChatHistory.findOne({_id: message_history._id })
+    console.log(username)
 
     if (message_history) {
       message_history.chat.chat_history.push(req.body.message)

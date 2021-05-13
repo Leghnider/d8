@@ -3,6 +3,8 @@
 <div class="chat-display">
   {{#each this.message_history}}
   <span> {{this.chat.chat_history}} - </span>
+  {{this.chat.userprofile}}
+
   {{/each}}
 </div>
 <form id="form" id="chat_form" action="/user/{{match._id}}/chat" method="post">
