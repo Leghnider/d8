@@ -248,7 +248,7 @@ var HomeController = {
         location: {$in: locationQuery} })
     }     
  
-    res.render('profiles/filtered', {title:"Filtered Profiles", searchResults: searchResults})
+    res.render('profiles/filtered', {title:"Filtered Profiles", searchResults: searchResults, user: user})
   },
   RandomLike: async function (req, res) {
     // this is from the dashboard - need to get the array of search results
