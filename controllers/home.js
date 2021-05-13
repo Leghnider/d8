@@ -122,12 +122,13 @@ var HomeController = {
   },
 
   Login: function (req, res) {
-    res.render("home/login", { title: "Log In" });
+    res.render("home/login", { title: "Log In", messages: req.flash('logstatus')});
   },
   Authenticate: async function (req, res) {
     const { email, password } = req.body;
     const user = await User.findOne({ email });
     if (!user) {
+      req.flash('logstatus', 'Your credentials are incorrect, please try again');
       res.redirect("/login");
     }
     const validPassword = await bcrypt.compare(password, user.password);
@@ -135,6 +136,7 @@ var HomeController = {
       req.session.user_id = user._id;
       res.redirect("/home");
     } else {
+      req.flash('logstatus', 'Your credentials are incorrect, please try again');
       res.redirect("/login");
     }
   },
@@ -181,10 +183,14 @@ var HomeController = {
       title: "Home",
       userProfiles: searchResults,
       user: user,
+      messages: req.flash('match')
     });
   },
 
   Filter: async(req, res) => {
+    if (!req.session.user_id) {
+			res.redirect("/login");
+		}
 
     var minage = 18;
     var maxage = 100;
@@ -248,9 +254,12 @@ var HomeController = {
         location: {$in: locationQuery} })
     }     
  
-    res.render('profiles/filtered', {title:"Filtered Profiles", searchResults: searchResults})
+    res.render('profiles/filtered', {title:"Filtered Profiles", searchResults: searchResults, user: user})
   },
   RandomLike: async function (req, res) {
+    if (!req.session.user_id) {
+			res.redirect("/login");
+		}
     // this is from the dashboard - need to get the array of search results
     const user = await User.findById(req.session.user_id);
 
@@ -309,13 +318,14 @@ var HomeController = {
 
     if (isMatched === true) {
 			await UserProfile.findByIdAndUpdate(randomLike._id, {
-				$push: {matched: user_profile_details._id}
+				$addToSet: {matched: user_profile_details._id}
 			})
 			await UserProfile.findByIdAndUpdate(user_profile_details._id, {
-				$push: {matched: randomLike._id}
+				$addToSet: {matched: randomLike._id}
 			})
+      req.flash('match', 'You have a match');
 		};
-
+    
     res.redirect("/home");
   },
   Logout: function (req, res) {

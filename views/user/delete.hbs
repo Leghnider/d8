@@ -2,15 +2,17 @@
 
 <div class="content-container container">
   <main class="form-delete">
-    <div class="row py-2 ">
-      <div class="card">
-        <div class="card-body">
-          <h3>{{user.firstName}}, are you sure you want to delete your account?</h3>
-          <div class="row">
-            <div class="col-6 justify-content-center" >
-              <form id="delete-profile-form" action="/user/{{user._id}}/delete" method="POST">
-                <button class="btn btn-sm btn-primary" type="submit">Delete profile</button>
-              </form>
+    <div class="row py-2 mx-auto">
+      <div class="col-10 mx-auto">
+        <div class="card">
+          <div class="card-body">
+            <h3>{{user.firstName}}, are you sure you want to delete your account?</h3>
+            <div class="row">
+              <div class="col-6 justify-content-center" >
+                <form id="delete-profile-form" action="/user/{{user._id}}/delete" method="POST">
+                  <button class="btn btn-warning" type="submit">Delete Profile</button>
+                </form>
+              </div>
             </div>
           </div>
         </div>
@@ -18,8 +20,8 @@
     </div>
     <div class="row">
       <div class="col-6 justify-content-center">
-          <button type="button" class="btn btn-primary btn-sm">
-            <a style="text-decoration: none;" href="/home">Back to Dashboard</a>
+          <button type="button" class="btn btn btn-primary card-btn btn-a">
+            <a style="color:white; text-decoration: none;" href="/user/{{user._id}}">Back to Profile Page</a>
           </button> 
         </div> 
     </div>

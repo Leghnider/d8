@@ -2,7 +2,8 @@
   {{> navbar2}}
   <section class="container-fluid">
     <div class="row py-4">
-        <div class="col-md-6 d-flex justify-content-center py-3">
+
+       <div class="col-md-6 d-flex justify-content-center py-3">
           <div class="card" style="width: 34rem;">
             {{#each userProfile.profileImages}}
               <img src="{{this.url}}" class="card-img-top-profile" alt="">
@@ -12,6 +13,7 @@
             </div>
           </div>
         </div>
+
         <div class="col-md-6 d-flex justify-content-center py-3">
           <div class="card" style="width: 34rem;">
             <div class="card-body">
@@ -22,18 +24,53 @@
               <p class="card-text">Living in {{userProfile.location}}</p>
               <p class="card-text">Interested in {{userProfile.interested_in}}</p>
               <p class="card-text">{{userProfile.bio}}</p> 
-              <a href="/user/match/{{userProfile._id}}">Matches</a>
+              <button type="button" class="btn btn-primary card-btn btn-a"><a style="text-decoration: none;" href="/user/match/{{userProfile._id}}">Matches</a></button>              
               <button type="button" class="btn btn-primary card-btn btn-a"><a style="text-decoration: none;" href="/user/{{user._id}}/edit">Edit Your Profile</a></button>
               <button type="button" class="btn btn-primary card-btn btn-a"><a style="text-decoration: none;" href="/user/{{user._id}}/delete">Delete Your Profile</a></button>
             </div>
           </div>
         </div>
+    </div>
+    <div class="row">
+      <div class="col-8 mx-auto py-3">
+        <h2>Your Photos</h2>
+        <p>These can be viewed by other users</p>
+        {{#if_eq userProfile.images.length 0}}
+          <p>You have not uploaded any additional images for others to view</p>
+        {{/if_eq}}
+        <div>
+          <form id="delete-images-form" action="/user/{{user._id}}/deletePhotos" method="post">
+          <div class="row py-2">
+            {{#each userProfile.images}}
+              <div class="col-sm-2">
+                <img src="{{this.url}}" alt="..." class="img-thumbnail">
+                <div class="form-check-inline">
+                  <input type="checkbox" name="deletedImages" id="image-{{@index}}" value="{{this.filename}}">
+                  <label for="image-{{@index}}">Delete</label>
+                </div>
+              </div>
+            {{/each}}
+          </div>
+          <button class="w-100 btn btn-primary card-btn btn-a" type="submit">Delete photos</button>
+          </form>     
+        </div>
+        <div>
+          <form id="add-images-form" action="/user/{{user._id}}/addPhoto" method="post" enctype="multipart/form-data">
+            <label for="image">Upload pictures</label>
+            <input style="margin-top: 10px" type='file' name="image" id="image" multiple>
+            <button class="w-100 btn btn-primary card-btn btn-a" type="submit">Add photos</button>
+          </form>       
+        </div>  
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-8 mx-auto py-4">
         <div class="row">
           <div id="accordion">
             <div class="card">
               <div class="card-header" id="questionOne">
                 <h5 class="mb-0">
-                  <button class="btn btn-link" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                  <button class="btn btn-link btn-light" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
                     Q1. What is your go-to Karaoke song?
                   </button>
                 </h5>
@@ -106,28 +143,9 @@
             </div>
           </div>
         </div>  
-        <div>
-          <p>Your Photos</p>
-            <div class="row">
-              <form id="delete-images-form" action="/user/{{user._id}}/deletePhotos" method="post">
-              {{#each userProfile.images}}
-              <div class="col-1">
-                <img src="{{this.url}}" alt="..." class="img-thumbnail">
-                <div class="form-check-inline">
-                  <input type="checkbox" name="deletedImages" id="image-{{@index}}" value="{{this.filename}}">
-                  <label for="image-{{@index}}">Delete</label>
-                </div>
-              </div>
-              {{/each}}
-              <button class="w-100 btn btn-lg btn-primary" type="submit">Delete photos</button>
-              </form>
-            </div> 
-            <form id="add-images-form" action="/user/{{user._id}}/addPhoto" method="post" enctype="multipart/form-data">
-              <label for="image">Upload pictures</label>
-              <input style="margin-top: 10px" type='file' name="image" id="image" multiple>
-              <button class="w-100 btn btn-lg btn-primary" type="submit">Add photos</button>
-            </form>
-        </div>
+
+      </div>
+    </div>
     <div class="row py-4" >
     </div>
   </section>

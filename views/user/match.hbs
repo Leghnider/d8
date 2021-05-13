@@ -1,31 +1,46 @@
-Matches page
+<section id="dashboard-page">
+  {{> navbar2}}
+  <section class="container-fluid">
+    <div class="row py-2">
+      <h1><a style="text-decoration: none;" href="/user/{{user._id}}">{{user.firstName}}</a> - Your Matches</h1>
+    </div>
+    {{#if_eq matchProfile.length 0}}
+      <p>Unforturnately you have no matches at the moment</p>
+    {{/if_eq}}
 
-{{userProfile.username}} - Your Matches
-{{!-- {{#each userProfile}}
-
-{{this.username}}
-
-
-{{/each}} --}}
-
-{{#each matchProfile}}
-<div>
-  {{this.username}}
-{{!-- Create a unmatch button --}}
- <form action='/user/unmatch/{{this.id}}' method='post'>
-   <button style="background-color:white; border: white"type="submit"><i class= "fas fa-times" style="color:rgb(252, 0, 0)"></i></button>
-  </form>
-</div>
-
- <form action='/user/block/{{this.id}}' method='post'>
-   <button style="background-color:white; border: white"type="submit"><i class= "fas fa-ban" style="color:rgb(252, 0, 0)"></i></button>
-  </form>
-</div>
-
-
-{{/each}}
-
-
-
-
+    <div class="row py-2">
+      {{#each matchProfile}}
+        <div class="col-lg-4 col-md-6 col-12 py-2">
+          <div class="card mx-auto" style="width: 20rem;">
+            <div class="card-img-top">
+              {{#each this.profileImages}}
+              <img class="card-img-top img-fluid" src="{{this.url}}" alt="Card image cap" class="class img-fluid";>
+              {{/each}}
+            </div>
+            <div class="card-body-bio">
+              <h5><a style="text-decoration: none;" href="/profiles/{{this._id}}">{{this.username}}</a></h5>
+              <div>
+              {{!-- Create a unmatch button --}}
+                <form action='/user/unmatch/{{this.id}}' method='post'>
+                  <button style="background-color:white; border: white"type="submit"><p>Unmatch <i class= "fas fa-times fa-2x" style="color:rgb(252, 0, 0)"></i></p></button>
+                </form>
+              </div>
+              <div>
+                <form action='/user/block/{{this.id}}' method='post'>
+                  <button style="background-color:white; border: white"type="submit"><p></i>Block <i class= "fas fa-ban fa-2x" style="color:rgb(252, 0, 0)"></i></p></button>
+                </form>
+              </div>
+              
+            </div>
+          </div>
+          <div class="py-3">
+                <button type="button" class="w-100 btn btn-primary card-btn btn-a"><a style="text-decoration: none; color:white" href="">Chat with {{this.username}}</a></button>              
+          </div>   
+        </div>
+      {{/each}}
+    </div>
+    <div class="row py-6" style="height: 5rem;">
+    </div>
+  </section>
+</section>
 
