@@ -122,12 +122,13 @@ var HomeController = {
   },
 
   Login: function (req, res) {
-    res.render("home/login", { title: "Log In" });
+    res.render("home/login", { title: "Log In", messages: req.flash('logstatus')});
   },
   Authenticate: async function (req, res) {
     const { email, password } = req.body;
     const user = await User.findOne({ email });
     if (!user) {
+      req.flash('logstatus', 'Your credentials are incorrect, please try again');
       res.redirect("/login");
     }
     const validPassword = await bcrypt.compare(password, user.password);
@@ -135,6 +136,7 @@ var HomeController = {
       req.session.user_id = user._id;
       res.redirect("/home");
     } else {
+      req.flash('logstatus', 'Your credentials are incorrect, please try again');
       res.redirect("/login");
     }
   },

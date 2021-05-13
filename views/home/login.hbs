@@ -23,6 +23,11 @@
       <button class="w-100 btn btn-lg btn-primary" type="submit">Log in</button>
     </form>
         <div class="row py-3">
+          {{#if messages}}
+    <div class="alert alert-danger" role="alert">
+      {{messages}}
+    </div>
+    {{/if}}
       <div class="col-12 align-items-centre">
         <p style="max-width: 300px;" >Haven't got an account yet? 
           <a class="sign-up-link" style="color:  #e80d4a;" href="http:/register">Sign up</a></p>
