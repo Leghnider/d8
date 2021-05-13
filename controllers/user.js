@@ -1,6 +1,7 @@
 var UserProfile = require("../models/userProfile");
 var User = require("../models/userAccount");
 const SocketServer  = require("../socket-server");
+var ChatRoom = require('../models/chatroom');
 
 
 
@@ -137,18 +138,18 @@ var UserController = {
       res.redirect("/login");
     }
     const { connectionString } = req.params
-    console.log(connectionString)
+    //console.log(connectionString)
 
       const userProfile = await UserProfile.findOne({
         useraccount: { _id: req.session.user_id },
       });
       const userId = userProfile._id
-      const matchId = req.params.id
+     
 
       let rooms = [];
-      const roomName = `${userId}-${matchId}`
+      const roomName = `${userId}-${connectionString}`
       console.log(roomName);
-      console.log(rooms);
+      //console.log(rooms);
 
       const getReverse = (roomName) => roomName.split("-").reverse().join("-");
 
@@ -160,9 +161,13 @@ var UserController = {
     const getActiveRoom = (roomName) => {
     return rooms.find((r) => r === roomName || r === getReverse(roomName));
   };
+  console.log(addActiveRoom(roomName))
+  console.log(getActiveRoom(roomName))
+  console.log(rooms)
+
 
       
-      SocketServer.getSocketServer().of(`/${connectionString}`).on("connection", (roomName) => {
+      SocketServer.getSocketServer().of(`/${roomName}`).on("connection", (roomName) => {
         roomName.on("SEND_MESSAGE", (msg) => {
           // When a user sends a message ...
           console.log(msg);
@@ -177,7 +182,7 @@ var UserController = {
       });
       
       
-      res.render('user/chat', {userProfile: userProfile, channel: `/${connectionString}`, userId: userId, matchId: matchId} )
+      res.render('user/chat', {userProfile: userProfile, channel: `/${roomName}`, userId: userId, roomName: roomName })
     
     }
 

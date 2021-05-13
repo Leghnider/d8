@@ -18,6 +18,7 @@
     <script>
       function initialize() {
         const socket = io("{{channel}}");
+        console.log("{{roomName}}")
         const sendButton = document.getElementById("send-button")
         const history = document.getElementById("conversation-history")
 

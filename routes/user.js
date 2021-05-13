@@ -11,7 +11,7 @@ router.get('/:id/edit', UserController.EditProfile);
 router.post('/:id/edit', UserController.UpdateProfile);
 router.post('/liked/:id', UserController.LikeProfile);
 router.get('/match/:id', UserController.MatchProfile)
-router.get('/chat/:connectionString', UserController.ChatPage)
+router.get('/chat/:roomName', UserController.ChatPage)
 
 // router.post('/disliked/:id', UserController.DislikeProfile);
 
