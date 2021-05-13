@@ -5,6 +5,9 @@
       <div class="col-8">
         <div class="row py-2">
           <h3><a style="text-decoration: none; color: #e80d4a" href="/user/{{user._id}}">{{user.firstName}}</a> - Your Potential D8s</h3>
+          {{#if_eq userProfiles.length 0}}
+            <p>Unforturnately their are no other users to 'like', please try again later</p>
+          {{/if_eq}}
           <div id="dashboardCarousel" class="carousel slide" data-interval="false">
             <div class="carousel-inner">
               {{#each userProfiles}}
@@ -46,12 +49,15 @@
         </div>
       </div>
       <div class="col-4 mx-auto">
+        {{#not_eq userProfiles.length 0}}        
         <div class="row py-3">
           <h4 style="color: #e80d4a" >Take a 'chance' on love</h4>
           <form id="random-like-form" action="/random" method="post">
             <button class="btn btn-primary btn-lg" style="background-color: #f6ce00 !important; border: #f6ce00;" value="random-like"> <h5>Randomly <i class= "fas fa-heart fa-2x" style="color: #e80d4a"></i></h5>  </button>
           </form>
         </div>
+        {{/not_eq}}
+
         <div class="row py-3">
 
         </div>
