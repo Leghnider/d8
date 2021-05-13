@@ -180,3 +180,6 @@ body {
   text-decoration: none;
 }
 
+#accordian p{ 
+  text-align: left;
+}
