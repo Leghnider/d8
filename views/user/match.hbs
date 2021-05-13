@@ -4,6 +4,9 @@
     <div class="row py-2">
       <h1><a style="text-decoration: none;" href="/user/{{user._id}}">{{user.firstName}}</a> - Your Matches</h1>
     </div>
+    {{#if_eq matchProfile.length 0}}
+      <p>Unforturnately you have no matches at the moment</p>
+    {{/if_eq}}
 
     <div class="row py-2">
       {{#each matchProfile}}
