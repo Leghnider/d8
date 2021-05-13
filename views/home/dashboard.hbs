@@ -46,15 +46,39 @@
         </div>
       </div>
       <div class="col-4 mx-auto">
-        <h4>Take a 'chance' on love</h4>
-        <form id="random-like-form" action="/random" method="post">
-          <button class="btn btn-primary" value="random-like"> <h5>Randomly</h5> <i class= "fas fa-heart fa-2x" style="color: #e80d4a"></i> </button>
+        <div class="row py-3">
+          <h4>Take a 'chance' on love</h4>
+          <form id="random-like-form" action="/random" method="post">
+            <button class="btn btn-primary" value="random-like"> <h5>Randomly</h5> <i class= "fas fa-heart fa-2x" style="color: #e80d4a"></i> </button>
+          </form>
+        </div>
+        
+        <h4>Filter your search results</h4>
+        <form class="filterResults" action="/filtered" method="get">
+          <h5>Age: </h5>
+          <label for="minage">Min Age:</label>
+          <input id="minage" type="number" name="minage" min="18" max="100" placeholder="18">
+          <label for="maxage">Min Age:</label>
+          <input id="maxage" type="number" name="maxage" min="18" max="100" placeholder="100">
+          <h5>Location: </h5>
+          <label for="location1">North London</label>
+          <input type="checkbox" id="location1" name="location" value="North London">
+          <label for="location2">West London</label>
+          <input type="checkbox" id="location2" name="location" value="West London">
+          <label for="location3">South London</label>
+          <input type="checkbox" id="location3" name="location" value="South London">
+          <label for="location4">East London</label>
+          <input type="checkbox" id="location4" name="location" value="East London">
+          <div class="py-3">
+            <input type="submit" value="Filter Results">
+          </div>
         </form>
       </div>
+
     </div>
 {{!-- Space for the filtering form --}}
 
-    <div class="row py-4">
+    {{!-- <div class="row py-4">
       <div class="col-7 px-4">
         <h4>Filter your search results</h4>
         <form class="filterResults" action="/filtered" method="get">
@@ -77,7 +101,7 @@
           </div>
         </form>
       </div>
-    </div>
+    </div> --}}
 
 
 
