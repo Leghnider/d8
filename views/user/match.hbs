@@ -22,19 +22,19 @@
               <div>
               {{!-- Create a unmatch button --}}
                 <form action='/user/unmatch/{{this.id}}' method='post'>
-                  <button style="background-color:white; border: white"type="submit"><p>Unmatch <i class= "fas fa-times fa-2x" style="color:rgb(252, 0, 0)"></i></p></button>
+                  <button style="background-color:white; border: white;  margin-left: 5px;" type="submit"><p>Unmatch <i class= "fas fa-times fa-2x" style="color:rgb(252, 0, 0)"></i></p></button>
                 </form>
               </div>
               <div>
                 <form action='/user/block/{{this.id}}' method='post'>
-                  <button style="background-color:white; border: white"type="submit"><p></i>Block <i class= "fas fa-ban fa-2x" style="color:rgb(252, 0, 0)"></i></p></button>
+                  <button style="background-color:white; border: white' float: right; margin-right: 10px;"type="submit"><p></i>Block <i class= "fas fa-ban fa-2x" style="color:rgb(252, 0, 0)"></i></p></button>
                 </form>
               </div>
               
             </div>
           </div>
           <div class="py-3">
-                <button type="button" class="w-100 btn btn-primary card-btn btn-a"><a style="text-decoration: none; color:white" href="">Chat with {{this.username}}</a></button>              
+                <button type="button" class="w-100 btn btn-primary card-btn btn-a"><a style="text-decoration: none; color:white" href="/user/{{this._id}}/chat">Chat with {{this.username}}</a></button>              
           </div>   
         </div>
       {{/each}}

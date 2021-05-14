@@ -1,0 +1,48 @@
+<html lang="en">
+
+<head>
+
+</head>
+
+<body>
+    {{> navbar2}}
+    <div class="container-sm" style="width: 50%; padding: 50px;">
+        <h1 class="text-center">Your conversation with {{matchProfile.username}}</h1>
+        <div class="container-sm">
+            <div id="future" class="card" style="height: 300px;">
+                <br>
+            </div>
+            <div class="container-sm">
+                <form id="form" id="chat_form" style="padding-top: 20px">
+                    <input id="chat_input" type="text">
+                    <input type="submit" value="Send">
+                </form>
+            </div>
+
+        </div>
+    </div>
+
+
+
+    {{> footer}}
+
+    <script src="/socket.io/socket.io.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script>
+        var socket = io.connect('http://localhost:3000/');
+
+        socket.on('connect', function (data) {
+            socket.emit('join', 'Hello World from client');
+        });
+        socket.on('broad', function (data) {
+            $('#future').append(`<div class="chat-msg">${data}</div>`);
+        });
+
+        $('form').submit(function (e) {
+            e.preventDefault();
+            var message = $('#chat_input').val();
+            socket.emit('messages', message);
+        });
+
+    </script>
+</body>

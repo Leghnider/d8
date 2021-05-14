@@ -21,6 +21,7 @@ router.post('/:id/deletePhotos', UserController.DeletePhoto);
 
 router.post('/liked/:id', UserController.LikeProfile);
 router.get('/match/:id', UserController.MatchProfile);
+router.get('/:id/chat', UserController.ChatPage);
 
 router.post('/unmatch/:id', UserController.UnmatchProfile);
 router.post('/block/:id', UserController.BlockProfile);

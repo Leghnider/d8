@@ -6,6 +6,7 @@ const UserAccount = require("../models/userAccount");
 
 var HomeController = {
   Index: function (req, res) {
+    res.io.emit("socketToMe", "users");
     res.render("home/index", { title: "d8" });
   },
   Register: function (req, res) {
@@ -183,6 +184,7 @@ var HomeController = {
       title: "Home",
       userProfiles: searchResults,
       user: user,
+      userProfileDetails: user_profile_details,
       messages: req.flash('match')
     });
   },

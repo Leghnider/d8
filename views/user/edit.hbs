@@ -3,7 +3,7 @@
   <main class="form-register">
     <div class="row py-3">
       <form id="edit-profile-form" action="/user/{{user._id}}/edit" method="POST" enctype="multipart/form-data">
-      <h1 class="h4 mb-3 fw-normal">Edit your profile</h1>
+      <h1 class="h4 mb-3 fw-normal" style="font-weight: bolder;">Edit your profile</h1>
       <p>Your profile will be visible to other users</p>
 
       <div class="row">
@@ -28,13 +28,13 @@
       </div>
 
       <div class="row">
-        <div class="col-8 mx-auto py-1 mb-4">
+        <div class="col-12 mx-auto py-1 mb-4">
           <label for="bio">Bio</label>
-          <textarea class="form-control" id="bio" type="text" name="bio" rows="7">{{userInfo.bio}}</textarea>
+          <textarea class="form-control" id="bio" type="text" name="bio" rows="7" style="width: 100%;">{{userInfo.bio}}</textarea>
         </div>
       </div>
       <div>
-          <label for="profileImage">Edit your profile picture</label>
+          <label for="profileImage" style="padding-top: 10px; padding-bottom: 30px;">Edit your profile picture</label>
           <input style="margin-top: 10px" type='file' name="profileImage" id="profileImage">
       </div>
       
