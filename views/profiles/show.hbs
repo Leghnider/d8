@@ -48,7 +48,7 @@
             <p class="card-text">{{profile.gender}}</p> 
             <p class="card-text">Interested in {{profile.interested_in}}</p>
             <p class="card-text">{{profile.bio}}</p> 
-            <p class="card-text">Contact them on: {{email}}</p>
+            {{!-- <p class="card-text">Contact them on: {{email}}</p> --}}
             <form action='/user/liked/{{profile._id}}' method='post'>
               <button style="background-color:white; border: white; text-align: center" type="submit"><i class= "fas fa-heart fa-2x" style="color: #e80d4a"></i></button>
             </form>
