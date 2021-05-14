@@ -111,10 +111,11 @@ var UserController = {
       const userProfile = await UserProfile.findOne({
         useraccount: { _id: req.session.user_id },
       });
+			// get all their matches 
       const matchProfile = await UserProfile.find({
-        _id: { $all: userProfile.matched },
+        _id: { $in: userProfile.matched },
       });
-
+				
       res.render("user/match", {
         title: "Matches",
         userProfile: userProfile,
