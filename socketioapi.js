@@ -5,11 +5,13 @@ const socketapi = {
 
 // Add your socket.io logic here!
 io.on('connection', (socket) => {
-    console.log('a user connected');
-    socket.on('disconnect', () => {
-      console.log('user disconnected');
-    });
+   console.log( "A user connected" );
+  socket.on('chat message', msg => {
+    io.emit('chat message', msg);
   });
+  socket.broadcast.emit("Hello")
+});
+
 // end of socket.io logic
 
 module.exports = socketapi;

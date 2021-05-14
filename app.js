@@ -15,6 +15,8 @@ var userRouter = require("./routes/user");
 var profilesRouter = require("./routes/profiles");
 
 var app = express();
+var server = require('http').Server(app);
+var io = require('socket.io')(server);
 
 var hbs = require('hbs');
 
@@ -39,6 +41,11 @@ hbs.registerHelper('not_eq', function(a, b, opts) {
   }
 });
 
+hbs.registerHelper("hasLiked", (matchProfile, myProfile) => {
+  const result = myProfile.liked.find((l) => l === matchProfile._id.toString());
+  return !!result
+})
+
 // view engine setup
 app.set("views", path.join(__dirname, "views"));
 app.set("view engine", "hbs");
@@ -57,6 +64,23 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, "public")));
+
+// socket midddleware
+app.use(function(req, res, next){
+  res.io = io;
+  next();
+});
+
+io.on('connection', function(client) {
+  console.log('Client connected...');
+  client.on('join', function(data) {
+      console.log(data);
+      client.on('messages', function(data) {
+          client.emit('broad', data);
+          client.broadcast.emit('broad',data);
+      });
+  });
+});
 
 // route setup
 // do we need a homeRouter? - Use this route for all the login, logout, registration information, will include the 'home' (dashboard) page
@@ -82,4 +106,4 @@ app.use(function (err, req, res) {
   res.render("error");
 });
 
-module.exports = app;
+module.exports = {app: app, server: server};

@@ -17,7 +17,7 @@
         <div class="col-md-6 d-flex justify-content-center py-3">
           <div class="card" style="width: 34rem;">
             <div class="card-body">
-              <h5 class="card-title card-title-title">Your Profile</h5>
+              <h5 class="card-title card-title-title" style="font-weight: bolder;">Your Profile</h5>
               <h5 class="card-title">{{userProfile.username}}</h5>
               <p class="card-text">{{userProfile.age}} years old</p>
               <p class="card-text">{{userProfile.gender}}</p>
@@ -51,14 +51,14 @@
               </div>
             {{/each}}
           </div>
-          <button class="w-100 btn btn-primary card-btn btn-a" type="submit">Delete photos</button>
+          <button class="w-100 btn btn-primary card-btn btn-a" style="padding-top: 10px; padding-bottom: 10px;" type="submit">Delete photos</button>
           </form>     
         </div>
         <div>
           <form id="add-images-form" action="/user/{{user._id}}/addPhoto" method="post" enctype="multipart/form-data">
-            <label for="image">Upload pictures</label>
+            <label for="image" style="padding-top: 10px; padding-bottom: 10px;">Upload pictures</label>
             <input style="margin-top: 10px" type='file' name="image" id="image" multiple>
-            <button class="w-100 btn btn-primary card-btn btn-a" type="submit">Add photos</button>
+            <button class="w-100 btn btn-primary card-btn btn-a" style="padding-top: 10px; padding-bottom: 10px;" type="submit">Add photos</button>
           </form>       
         </div>  
       </div>
@@ -71,7 +71,7 @@
               <div class="card-header" id="questionOne">
                 <h5 class="mb-0">
                   <button class="btn btn-link btn-light" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
-                    Q1. What is your go-to Karaoke song?
+                    <p> Q1. What is your go-to Karaoke song? </p>
                   </button>
                 </h5>
               </div>
@@ -85,7 +85,7 @@
             <div class="card">
               <div class="card-header" id="questionTwo">
                 <h5 class="mb-0">
-                  <button class="btn btn-link collapsed" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+                  <button class="btn btn-link collapsed" style="text-decoration: none; color: #e90d4a;" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
                     Q2. If you could live anywhere in the world, where would it be and why? 
                   </button>
                 </h5>
